@@ -1,0 +1,2430 @@
+
+
+Microchip MPLAB XC8 Assembler V2.40 build 20220703182018 
+                                                                                               Mon Apr 15 08:41:57 2024
+
+Microchip MPLAB XC8 C Compiler v2.40 (Free license) build 20220703182018 Og1 
+     1                           	processor	18F4550
+     2                           	fnconf	rparam,??,?,0
+     3                           	pagewidth 120
+     4                           	opt	flic
+     5                           	psect	smallconst,global,reloc=2,class=SMALLCONST,delta=1,noexec
+     6                           	psect	cinit,global,reloc=2,class=CODE,delta=1
+     7                           	psect	bssCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     8                           	psect	cstackCOMRAM,global,class=COMRAM,space=1,delta=1,lowdata,noexec
+     9                           	psect	text0,global,reloc=2,class=CODE,delta=1
+    10                           	psect	text1,global,reloc=2,class=CODE,delta=1
+    11                           	psect	text2,global,reloc=2,class=CODE,delta=1,group=1
+    12                           	psect	text3,global,reloc=2,class=CODE,delta=1
+    13                           	psect	text4,global,reloc=2,class=CODE,delta=1
+    14                           	psect	text5,global,reloc=2,class=CODE,delta=1
+    15                           	psect	text6,global,reloc=2,class=CODE,delta=1
+    16                           	psect	text7,global,reloc=2,class=CODE,delta=1
+    17                           	psect	intsave_regs,global,class=BIGRAM,space=1,delta=1,noexec
+    18                           	psect	rparam,global,class=COMRAM,space=1,delta=1,noexec
+    19                           	psect	idloc,global,abs,ovrld,class=IDLOC,space=5,delta=1,noexec
+    20                           	psect	config,global,abs,ovrld,class=CONFIG,space=4,delta=1,noexec
+    21   000000                     
+    22                           ; Version 2.40
+    23                           ; Generated 17/11/2021 GMT
+    24                           ; 
+    25                           ; Copyright © 2021, Microchip Technology Inc. and its subsidiaries ("Microchip")
+    26                           ; All rights reserved.
+    27                           ; 
+    28                           ; This software is developed by Microchip Technology Inc. and its subsidiaries ("Microch
+      +                          ip").
+    29                           ; 
+    30                           ; Redistribution and use in source and binary forms, with or without modification, are
+    31                           ; permitted provided that the following conditions are met:
+    32                           ; 
+    33                           ;     1. Redistributions of source code must retain the above copyright notice, this lis
+      +                          t of
+    34                           ;        conditions and the following disclaimer.
+    35                           ; 
+    36                           ;     2. Redistributions in binary form must reproduce the above copyright notice, this 
+      +                          list
+    37                           ;        of conditions and the following disclaimer in the documentation and/or other
+    38                           ;        materials provided with the distribution. Publication is not required when
+    39                           ;        this file is used in an embedded application.
+    40                           ; 
+    41                           ;     3. Microchip's name may not be used to endorse or promote products derived from th
+      +                          is
+    42                           ;        software without specific prior written permission.
+    43                           ; 
+    44                           ; THIS SOFTWARE IS PROVIDED BY MICROCHIP "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES,
+    45                           ; INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS F
+      +                          OR
+    46                           ; PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL MICROCHIP BE LIABLE FOR ANY DIRECT, INDIREC
+      +                          T,
+    47                           ; INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING BUT NOT LIMITED TO
+    48                           ; PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA OR PROFITS; OR BUSINESS
+    49                           ; INTERRUPTION) HOWSOEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, ST
+      +                          RICT
+    50                           ; LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE U
+      +                          SE OF
+    51                           ; THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    52                           ; 
+    53                           ; 
+    54                           ; Code-generator required, PIC18F4550 Definitions
+    55                           ; 
+    56                           ; SFR Addresses
+    57   000000                     _LATBbits	set	3978
+    58   000000                     _TRISBbits	set	3987
+    59   000000                     _PORTAbits	set	3968
+    60   000000                     _LATAbits	set	3977
+    61   000000                     _TRISA	set	3986
+    62   000000                     _TRISD	set	3989
+    63   000000                     _ADCON1	set	4033
+    64   000000                     _TRISB	set	3987
+    65   000000                     _LATB	set	3978
+    66   000000                     _LATDbits	set	3980
+    67   000000                     _PORTDbits	set	3971
+    68                           
+    69                           	psect	smallconst
+    70   000800                     __psmallconst:
+    71                           	callstack 0
+    72   000800  00                 	db	0
+    73   000801                     STR_3:
+    74   000801  63                 	db	99	;'c'
+    75   000802  6F                 	db	111	;'o'
+    76   000803  6E                 	db	110	;'n'
+    77   000804  74                 	db	116	;'t'
+    78   000805  20                 	db	32
+    79   000806  69                 	db	105	;'i'
+    80   000807  6E                 	db	110	;'n'
+    81   000808  63                 	db	99	;'c'
+    82   000809  6F                 	db	111	;'o'
+    83   00080A  72                 	db	114	;'r'
+    84   00080B  72                 	db	114	;'r'
+    85   00080C  65                 	db	101	;'e'
+    86   00080D  63                 	db	99	;'c'
+    87   00080E  74                 	db	116	;'t'
+    88   00080F  61                 	db	97	;'a'
+    89   000810  00                 	db	0
+    90   000811                     STR_1:
+    91   000811  74                 	db	116	;'t'
+    92   000812  65                 	db	101	;'e'
+    93   000813  63                 	db	99	;'c'
+    94   000814  6C                 	db	108	;'l'
+    95   000815  65                 	db	101	;'e'
+    96   000816  61                 	db	97	;'a'
+    97   000817  72                 	db	114	;'r'
+    98   000818  20                 	db	32
+    99   000819  63                 	db	99	;'c'
+   100   00081A  6F                 	db	111	;'o'
+   101   00081B  6E                 	db	110	;'n'
+   102   00081C  74                 	db	116	;'t'
+   103   00081D  72                 	db	114	;'r'
+   104   00081E  61                 	db	97	;'a'
+   105   00081F  00                 	db	0
+   106   000820                     STR_4:
+   107   000820  72                 	db	114	;'r'
+   108   000821  65                 	db	101	;'e'
+   109   000822  70                 	db	112	;'p'
+   110   000823  69                 	db	105	;'i'
+   111   000824  74                 	db	116	;'t'
+   112   000825  61                 	db	97	;'a'
+   113   000826  00                 	db	0
+   114   000827                     STR_2:
+   115   000827  65                 	db	101	;'e'
+   116   000828  73                 	db	115	;'s'
+   117   000829  70                 	db	112	;'p'
+   118   00082A  65                 	db	101	;'e'
+   119   00082B  72                 	db	114	;'r'
+   120   00082C  65                 	db	101	;'e'
+   121   00082D  00                 	db	0
+   122   00082E  00                 	db	0	; dummy byte at the end
+   123   000000                     
+   124                           ; #config settings
+   125                           
+   126                           	psect	cinit
+   127   000F56                     __pcinit:
+   128                           	callstack 0
+   129   000F56                     start_initialization:
+   130                           	callstack 0
+   131   000F56                     __initialization:
+   132                           	callstack 0
+   133                           
+   134                           ; Clear objects allocated to COMRAM (12 bytes)
+   135   000F56  EE00  F001         	lfsr	0,__pbssCOMRAM
+   136   000F5A  0E0C               	movlw	12
+   137   000F5C                     clear_0:
+   138   000F5C  6AEE               	clrf	postinc0,c
+   139   000F5E  06E8               	decf	wreg,f,c
+   140   000F60  E1FD               	bnz	clear_0
+   141   000F62                     end_of_initialization:
+   142                           	callstack 0
+   143   000F62                     __end_of__initialization:
+   144                           	callstack 0
+   145   000F62  0E00               	movlw	low (__Lsmallconst shr (0+16))
+   146   000F64  6EF8               	movwf	tblptru,c
+   147   000F66  0E08               	movlw	high __Lsmallconst
+   148   000F68  6EF7               	movwf	tblptrh,c
+   149   000F6A  0100               	movlb	0
+   150   000F6C  EFAD  F005         	goto	_main	;jump to C main() function
+   151                           
+   152                           	psect	bssCOMRAM
+   153   000001                     __pbssCOMRAM:
+   154                           	callstack 0
+   155   000001                     _teclado:
+   156                           	callstack 0
+   157   000001                     	ds	8
+   158   000009                     _par:
+   159                           	callstack 0
+   160   000009                     	ds	2
+   161   00000B                     _cont:
+   162                           	callstack 0
+   163   00000B                     	ds	2
+   164                           
+   165                           	psect	cstackCOMRAM
+   166   00000D                     __pcstackCOMRAM:
+   167                           	callstack 0
+   168   00000D                     ??_tecladito:
+   169   00000D                     ?___awdiv:
+   170                           	callstack 0
+   171   00000D                     LCDWriteNibble@b:
+   172                           	callstack 0
+   173   00000D                     ___awdiv@dividend:
+   174                           	callstack 0
+   175                           
+   176                           ; 2 bytes @ 0x0
+   177   00000D                     	ds	1
+   178   00000E                     LCDWriteNibble@ch:
+   179                           	callstack 0
+   180   00000E                     tecladito@contador:
+   181                           	callstack 0
+   182                           
+   183                           ; 2 bytes @ 0x1
+   184   00000E                     	ds	1
+   185   00000F                     ??_LCDPutCmd:
+   186   00000F                     ??_LCDPutChar:
+   187   00000F                     ___awdiv@divisor:
+   188                           	callstack 0
+   189                           
+   190                           ; 2 bytes @ 0x2
+   191   00000F                     	ds	1
+   192   000010                     LCDPutChar@ch:
+   193                           	callstack 0
+   194   000010                     LCDPutCmd@ch:
+   195                           	callstack 0
+   196                           
+   197                           ; 1 bytes @ 0x3
+   198   000010                     	ds	1
+   199   000011                     ??_LCDInit:
+   200   000011                     ___awdiv@counter:
+   201                           	callstack 0
+   202   000011                     LCDPutStr@ptr:
+   203                           	callstack 0
+   204                           
+   205                           ; 2 bytes @ 0x4
+   206   000011                     	ds	1
+   207   000012                     ___awdiv@sign:
+   208                           	callstack 0
+   209                           
+   210                           ; 1 bytes @ 0x5
+   211   000012                     	ds	1
+   212   000013                     ___awdiv@quotient:
+   213                           	callstack 0
+   214                           
+   215                           ; 2 bytes @ 0x6
+   216   000013                     	ds	2
+   217   000015                     ??_main:
+   218                           
+   219                           ; 1 bytes @ 0x8
+   220   000015                     	ds	4
+   221                           
+   222 ;;
+   223 ;;Main: autosize = 0, tempsize = 4, incstack = 0, save=0
+   224 ;;
+   225 ;; *************** function _main *****************
+   226 ;; Defined at:
+   227 ;;		line 19 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/main.c"
+   228 ;; Parameters:    Size  Location     Type
+   229 ;;		None
+   230 ;; Auto vars:     Size  Location     Type
+   231 ;;		None
+   232 ;; Return value:  Size  Location     Type
+   233 ;;                  1    wreg      void 
+   234 ;; Registers used:
+   235 ;;		wreg, fsr2l, fsr2h, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+   236 ;; Tracked objects:
+   237 ;;		On entry : 0/0
+   238 ;;		On exit  : 0/0
+   239 ;;		Unchanged: 0/0
+   240 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   241 ;;      Params:         0       0       0       0       0       0       0       0       0
+   242 ;;      Locals:         0       0       0       0       0       0       0       0       0
+   243 ;;      Temps:          4       0       0       0       0       0       0       0       0
+   244 ;;      Totals:         4       0       0       0       0       0       0       0       0
+   245 ;;Total ram usage:        4 bytes
+   246 ;; Hardware stack levels required when called: 3
+   247 ;; This function calls:
+   248 ;;		_LCDInit
+   249 ;;		_LCDPutCmd
+   250 ;;		_LCDPutStr
+   251 ;;		___awdiv
+   252 ;;		_tecladito
+   253 ;; This function is called by:
+   254 ;;		Startup code after reset
+   255 ;; This function uses a non-reentrant model
+   256 ;;
+   257                           
+   258                           	psect	text0
+   259   000B5A                     __ptext0:
+   260                           	callstack 0
+   261   000B5A                     _main:
+   262                           	callstack 28
+   263   000B5A                     
+   264                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 20:     ADCON1 = 0B00001111;
+   265   000B5A  0E0F               	movlw	15
+   266   000B5C  6EC1               	movwf	193,c	;volatile
+   267                           
+   268                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 21:     TRISD = 0B11110000;
+   269   000B5E  0EF0               	movlw	240
+   270   000B60  6E95               	movwf	149,c	;volatile
+   271                           
+   272                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 22:     TRISA = 0B11111100;
+   273   000B62  0EFC               	movlw	252
+   274   000B64  6E92               	movwf	146,c	;volatile
+   275   000B66                     
+   276                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 23:     LCDInit();
+   277   000B66  EC30  F007         	call	_LCDInit	;wreg free
+   278   000B6A                     
+   279                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 24:     LCDPutCmd(0x02);
+   280   000B6A  0E02               	movlw	2
+   281   000B6C  EC68  F007         	call	_LCDPutCmd
+   282   000B70                     
+   283                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 25:     LCDPutCmd(0x01);
+   284   000B70  0E01               	movlw	1
+   285   000B72  EC68  F007         	call	_LCDPutCmd
+   286   000B76                     
+   287                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 26:     LATAbits.LA0=1;
+   288   000B76  8089               	bsf	137,0,c	;volatile
+   289   000B78                     l1244:
+   290                           
+   291                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 28:         if(PORTAbits.RA2==1)
+   292   000B78  A480               	btfss	128,2,c	;volatile
+   293   000B7A  EFC1  F005         	goto	u541
+   294   000B7E  EFC3  F005         	goto	u540
+   295   000B82                     u541:
+   296   000B82  EF0A  F006         	goto	l1260
+   297   000B86                     u540:
+   298   000B86                     l37:
+   299   000B86  B480               	btfsc	128,2,c	;volatile
+   300   000B88  EFC8  F005         	goto	u551
+   301   000B8C  EFCA  F005         	goto	u550
+   302   000B90                     u551:
+   303   000B90  EFC3  F005         	goto	l37
+   304   000B94                     u550:
+   305   000B94                     
+   306                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 32:             par=cont/2;
+   307   000B94  C00B  F00D         	movff	_cont,___awdiv@dividend
+   308   000B98  C00C  F00E         	movff	_cont+1,___awdiv@dividend+1
+   309   000B9C  0E00               	movlw	0
+   310   000B9E  6E10               	movwf	(___awdiv@divisor+1)^0,c
+   311   000BA0  0E02               	movlw	2
+   312   000BA2  6E0F               	movwf	___awdiv@divisor^0,c
+   313   000BA4  ECCE  F006         	call	___awdiv	;wreg free
+   314   000BA8  C00D  F009         	movff	?___awdiv,_par
+   315   000BAC  C00E  F00A         	movff	?___awdiv+1,_par+1
+   316   000BB0                     
+   317                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 33:                     if(cont-2*par==0)
+   318   000BB0  C009  F015         	movff	_par,??_main
+   319   000BB4  C00A  F016         	movff	_par+1,??_main+1
+   320   000BB8  90D8               	bcf	status,0,c
+   321   000BBA  3615               	rlcf	??_main^0,f,c
+   322   000BBC  3616               	rlcf	(??_main+1)^0,f,c
+   323   000BBE  5015               	movf	??_main^0,w,c
+   324   000BC0  5C0B               	subwf	_cont^0,w,c
+   325   000BC2  6E17               	movwf	(??_main+2)^0,c
+   326   000BC4  5016               	movf	(??_main+1)^0,w,c
+   327   000BC6  580C               	subwfb	(_cont+1)^0,w,c
+   328   000BC8  6E18               	movwf	(??_main+3)^0,c
+   329   000BCA  5017               	movf	(??_main+2)^0,w,c
+   330   000BCC  1018               	iorwf	(??_main+3)^0,w,c
+   331   000BCE  A4D8               	btfss	status,2,c
+   332   000BD0  EFEC  F005         	goto	u561
+   333   000BD4  EFEE  F005         	goto	u560
+   334   000BD8                     u561:
+   335   000BD8  EFF0  F005         	goto	l1254
+   336   000BDC                     u560:
+   337   000BDC                     
+   338                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 34:                     {;C:/Users/Roberto Fernandez/Documents/electronica digital 
+      +                          avanzada/examen3/examen3.X/main.c: 35:                         LATAbits.LA1=1;
+   339   000BDC  8289               	bsf	137,1,c	;volatile
+   340                           
+   341                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 36:                         LATAbits.LA0=0;
+   342   000BDE  9089               	bcf	137,0,c	;volatile
+   343   000BE0                     l1254:
+   344                           
+   345                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 38:                     if(cont-2*par==1){
+   346   000BE0  C009  F015         	movff	_par,??_main
+   347   000BE4  C00A  F016         	movff	_par+1,??_main+1
+   348   000BE8  90D8               	bcf	status,0,c
+   349   000BEA  3615               	rlcf	??_main^0,f,c
+   350   000BEC  3616               	rlcf	(??_main+1)^0,f,c
+   351   000BEE  5015               	movf	??_main^0,w,c
+   352   000BF0  5C0B               	subwf	_cont^0,w,c
+   353   000BF2  6E17               	movwf	(??_main+2)^0,c
+   354   000BF4  5016               	movf	(??_main+1)^0,w,c
+   355   000BF6  580C               	subwfb	(_cont+1)^0,w,c
+   356   000BF8  6E18               	movwf	(??_main+3)^0,c
+   357   000BFA  0417               	decf	(??_main+2)^0,w,c
+   358   000BFC  1018               	iorwf	(??_main+3)^0,w,c
+   359   000BFE  A4D8               	btfss	status,2,c
+   360   000C00  EF04  F006         	goto	u571
+   361   000C04  EF06  F006         	goto	u570
+   362   000C08                     u571:
+   363   000C08  EF08  F006         	goto	l1258
+   364   000C0C                     u570:
+   365   000C0C                     
+   366                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 39:                         LATAbits.LA1=0;
+   367   000C0C  9289               	bcf	137,1,c	;volatile
+   368                           
+   369                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 40:                         LATAbits.LA0=1;
+   370   000C0E  8089               	bsf	137,0,c	;volatile
+   371   000C10                     l1258:
+   372                           
+   373                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 43:                     cont++;
+   374   000C10  4A0B               	infsnz	_cont^0,f,c
+   375   000C12  2A0C               	incf	(_cont+1)^0,f,c
+   376   000C14                     l1260:
+   377                           
+   378                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 48:         if(PORTAbits.RA3==1)
+   379   000C14  A680               	btfss	128,3,c	;volatile
+   380   000C16  EF0F  F006         	goto	u581
+   381   000C1A  EF11  F006         	goto	u580
+   382   000C1E                     u581:
+   383   000C1E  EFC1  F006         	goto	l1324
+   384   000C22                     u580:
+   385   000C22                     
+   386                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 49:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/exa
+      +                          men3/examen3.X/main.c: 52:             LCDPutStr("teclear contra");
+   387   000C22  0E11               	movlw	low STR_1
+   388   000C24  6E11               	movwf	LCDPutStr@ptr^0,c
+   389   000C26  0E08               	movlw	high STR_1
+   390   000C28  6E12               	movwf	(LCDPutStr@ptr+1)^0,c
+   391   000C2A  EC4D  F007         	call	_LCDPutStr	;wreg free
+   392   000C2E                     
+   393                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 53:             LCDPutCmd(0xC0);
+   394   000C2E  0EC0               	movlw	192
+   395   000C30  EC68  F007         	call	_LCDPutCmd
+   396   000C34                     
+   397                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 54:             LCDPutStr("espere");
+   398   000C34  0E27               	movlw	low STR_2
+   399   000C36  6E11               	movwf	LCDPutStr@ptr^0,c
+   400   000C38  0E08               	movlw	high STR_2
+   401   000C3A  6E12               	movwf	(LCDPutStr@ptr+1)^0,c
+   402   000C3C  EC4D  F007         	call	_LCDPutStr	;wreg free
+   403   000C40                     
+   404                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 55:             _delay((unsigned long)((300)*(20000000/4000.0)));
+   405   000C40  0E08               	movlw	8
+   406   000C42  6E16               	movwf	(??_main+1)^0,c
+   407   000C44  0E9D               	movlw	157
+   408   000C46  6E15               	movwf	??_main^0,c
+   409   000C48  0E06               	movlw	6
+   410   000C4A                     u687:
+   411   000C4A  2EE8               	decfsz	wreg,f,c
+   412   000C4C  D7FE               	bra	u687
+   413   000C4E  2E15               	decfsz	??_main^0,f,c
+   414   000C50  D7FC               	bra	u687
+   415   000C52  2E16               	decfsz	(??_main+1)^0,f,c
+   416   000C54  D7FA               	bra	u687
+   417                           
+   418                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 56:             while(teclado[0]!=1 | teclado[1]!=2 | teclado[2]!=3 | teclado[3]!=4
+      +                          )
+   419   000C56  EF85  F006         	goto	l1302
+   420   000C5A                     l1270:
+   421                           
+   422                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 57:             {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada
+      +                          /examen3/examen3.X/main.c: 58:                 LCDPutCmd(0x01);
+   423   000C5A  0E01               	movlw	1
+   424   000C5C  EC68  F007         	call	_LCDPutCmd
+   425   000C60                     
+   426                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 59:                 tecladito();
+   427   000C60  EC18  F004         	call	_tecladito	;wreg free
+   428   000C64                     
+   429                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 60:                 if(teclado[0]!=1 | teclado[1]!=2 | teclado[2]!=3 | teclado[3]!=
+      +                          4)
+   430   000C64  0401               	decf	_teclado^0,w,c
+   431   000C66  1002               	iorwf	(_teclado+1)^0,w,c
+   432   000C68  A4D8               	btfss	status,2,c
+   433   000C6A  EF39  F006         	goto	u591
+   434   000C6E  EF3B  F006         	goto	u590
+   435   000C72                     u591:
+   436   000C72  EF59  F006         	goto	l1282
+   437   000C76                     u590:
+   438   000C76  0E02               	movlw	2
+   439   000C78  1803               	xorwf	(_teclado+2)^0,w,c
+   440   000C7A  1004               	iorwf	(_teclado+3)^0,w,c
+   441   000C7C  A4D8               	btfss	status,2,c
+   442   000C7E  EF43  F006         	goto	u601
+   443   000C82  EF45  F006         	goto	u600
+   444   000C86                     u601:
+   445   000C86  EF59  F006         	goto	l1282
+   446   000C8A                     u600:
+   447   000C8A  0E03               	movlw	3
+   448   000C8C  1805               	xorwf	(_teclado+4)^0,w,c
+   449   000C8E  1006               	iorwf	(_teclado+5)^0,w,c
+   450   000C90  A4D8               	btfss	status,2,c
+   451   000C92  EF4D  F006         	goto	u611
+   452   000C96  EF4F  F006         	goto	u610
+   453   000C9A                     u611:
+   454   000C9A  EF59  F006         	goto	l1282
+   455   000C9E                     u610:
+   456   000C9E  0E04               	movlw	4
+   457   000CA0  1807               	xorwf	(_teclado+6)^0,w,c
+   458   000CA2  1008               	iorwf	(_teclado+7)^0,w,c
+   459   000CA4  B4D8               	btfsc	status,2,c
+   460   000CA6  EF57  F006         	goto	u621
+   461   000CAA  EF59  F006         	goto	u620
+   462   000CAE                     u621:
+   463   000CAE  EF85  F006         	goto	l1302
+   464   000CB2                     u620:
+   465   000CB2                     l1282:
+   466                           
+   467                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 61:                 {;C:/Users/Roberto Fernandez/Documents/electronica digital avan
+      +                          zada/examen3/examen3.X/main.c: 62:                     LCDPutStr("cont incorrecta");
+   468   000CB2  0E01               	movlw	low STR_3
+   469   000CB4  6E11               	movwf	LCDPutStr@ptr^0,c
+   470   000CB6  0E08               	movlw	high STR_3
+   471   000CB8  6E12               	movwf	(LCDPutStr@ptr+1)^0,c
+   472   000CBA  EC4D  F007         	call	_LCDPutStr	;wreg free
+   473   000CBE                     
+   474                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 63:                     LCDPutCmd(0xC0);
+   475   000CBE  0EC0               	movlw	192
+   476   000CC0  EC68  F007         	call	_LCDPutCmd
+   477   000CC4                     
+   478                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 64:                     LCDPutStr("repita");
+   479   000CC4  0E20               	movlw	low STR_4
+   480   000CC6  6E11               	movwf	LCDPutStr@ptr^0,c
+   481   000CC8  0E08               	movlw	high STR_4
+   482   000CCA  6E12               	movwf	(LCDPutStr@ptr+1)^0,c
+   483   000CCC  EC4D  F007         	call	_LCDPutStr	;wreg free
+   484   000CD0                     
+   485                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 65:                     LATAbits.LA0=1;
+   486   000CD0  8089               	bsf	137,0,c	;volatile
+   487   000CD2                     
+   488                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 66:                     LATAbits.LA1=0;
+   489   000CD2  9289               	bcf	137,1,c	;volatile
+   490   000CD4                     
+   491                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 67:                     _delay((unsigned long)((150)*(20000000/4000.0)));
+   492   000CD4  0E04               	movlw	4
+   493   000CD6  6E16               	movwf	(??_main+1)^0,c
+   494   000CD8  0ECF               	movlw	207
+   495   000CDA  6E15               	movwf	??_main^0,c
+   496   000CDC  0E02               	movlw	2
+   497   000CDE                     u697:
+   498   000CDE  2EE8               	decfsz	wreg,f,c
+   499   000CE0  D7FE               	bra	u697
+   500   000CE2  2E15               	decfsz	??_main^0,f,c
+   501   000CE4  D7FC               	bra	u697
+   502   000CE6  2E16               	decfsz	(??_main+1)^0,f,c
+   503   000CE8  D7FA               	bra	u697
+   504   000CEA                     
+   505                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 68:                     teclado[0]=0;
+   506   000CEA  0E00               	movlw	0
+   507   000CEC  6E02               	movwf	(_teclado+1)^0,c
+   508   000CEE  0E00               	movlw	0
+   509   000CF0  6E01               	movwf	_teclado^0,c
+   510   000CF2                     
+   511                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 69:                     teclado[1]=0;
+   512   000CF2  0E00               	movlw	0
+   513   000CF4  6E04               	movwf	(_teclado+3)^0,c
+   514   000CF6  0E00               	movlw	0
+   515   000CF8  6E03               	movwf	(_teclado+2)^0,c
+   516   000CFA                     
+   517                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 70:                     teclado[2]=0;
+   518   000CFA  0E00               	movlw	0
+   519   000CFC  6E06               	movwf	(_teclado+5)^0,c
+   520   000CFE  0E00               	movlw	0
+   521   000D00  6E05               	movwf	(_teclado+4)^0,c
+   522   000D02                     
+   523                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 71:                     teclado[3]=0;
+   524   000D02  0E00               	movlw	0
+   525   000D04  6E08               	movwf	(_teclado+7)^0,c
+   526   000D06  0E00               	movlw	0
+   527   000D08  6E07               	movwf	(_teclado+6)^0,c
+   528   000D0A                     l1302:
+   529                           
+   530                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 56:             while(teclado[0]!=1 | teclado[1]!=2 | teclado[2]!=3 | teclado[3]!=4
+      +                          )
+   531   000D0A  0401               	decf	_teclado^0,w,c
+   532   000D0C  1002               	iorwf	(_teclado+1)^0,w,c
+   533   000D0E  A4D8               	btfss	status,2,c
+   534   000D10  EF8C  F006         	goto	u631
+   535   000D14  EF8E  F006         	goto	u630
+   536   000D18                     u631:
+   537   000D18  EF2D  F006         	goto	l1270
+   538   000D1C                     u630:
+   539   000D1C  0E02               	movlw	2
+   540   000D1E  1803               	xorwf	(_teclado+2)^0,w,c
+   541   000D20  1004               	iorwf	(_teclado+3)^0,w,c
+   542   000D22  A4D8               	btfss	status,2,c
+   543   000D24  EF96  F006         	goto	u641
+   544   000D28  EF98  F006         	goto	u640
+   545   000D2C                     u641:
+   546   000D2C  EF2D  F006         	goto	l1270
+   547   000D30                     u640:
+   548   000D30  0E03               	movlw	3
+   549   000D32  1805               	xorwf	(_teclado+4)^0,w,c
+   550   000D34  1006               	iorwf	(_teclado+5)^0,w,c
+   551   000D36  A4D8               	btfss	status,2,c
+   552   000D38  EFA0  F006         	goto	u651
+   553   000D3C  EFA2  F006         	goto	u650
+   554   000D40                     u651:
+   555   000D40  EF2D  F006         	goto	l1270
+   556   000D44                     u650:
+   557   000D44  0E04               	movlw	4
+   558   000D46  1807               	xorwf	(_teclado+6)^0,w,c
+   559   000D48  1008               	iorwf	(_teclado+7)^0,w,c
+   560   000D4A  A4D8               	btfss	status,2,c
+   561   000D4C  EFAA  F006         	goto	u661
+   562   000D50  EFAC  F006         	goto	u660
+   563   000D54                     u661:
+   564   000D54  EF2D  F006         	goto	l1270
+   565   000D58                     u660:
+   566   000D58                     
+   567                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 75:             LCDPutCmd(0x01);
+   568   000D58  0E01               	movlw	1
+   569   000D5A  EC68  F007         	call	_LCDPutCmd
+   570   000D5E                     
+   571                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 76:             teclado[0]=0;
+   572   000D5E  0E00               	movlw	0
+   573   000D60  6E02               	movwf	(_teclado+1)^0,c
+   574   000D62  0E00               	movlw	0
+   575   000D64  6E01               	movwf	_teclado^0,c
+   576   000D66                     
+   577                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 77:             teclado[1]=0;
+   578   000D66  0E00               	movlw	0
+   579   000D68  6E04               	movwf	(_teclado+3)^0,c
+   580   000D6A  0E00               	movlw	0
+   581   000D6C  6E03               	movwf	(_teclado+2)^0,c
+   582   000D6E                     
+   583                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 78:             teclado[2]=0;
+   584   000D6E  0E00               	movlw	0
+   585   000D70  6E06               	movwf	(_teclado+5)^0,c
+   586   000D72  0E00               	movlw	0
+   587   000D74  6E05               	movwf	(_teclado+4)^0,c
+   588   000D76                     
+   589                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 79:             teclado[3]=0;
+   590   000D76  0E00               	movlw	0
+   591   000D78  6E08               	movwf	(_teclado+7)^0,c
+   592   000D7A  0E00               	movlw	0
+   593   000D7C  6E07               	movwf	(_teclado+6)^0,c
+   594   000D7E                     
+   595                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 80:             LATAbits.LA0=0;
+   596   000D7E  9089               	bcf	137,0,c	;volatile
+   597   000D80                     
+   598                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 81:             LATAbits.LA1=1;
+   599   000D80  8289               	bsf	137,1,c	;volatile
+   600   000D82                     l1324:
+   601                           
+   602                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 83:         if(PORTAbits.RA4 ==1)
+   603   000D82  A880               	btfss	128,4,c	;volatile
+   604   000D84  EFC6  F006         	goto	u671
+   605   000D88  EFC8  F006         	goto	u670
+   606   000D8C                     u671:
+   607   000D8C  EFBC  F005         	goto	l1244
+   608   000D90                     u670:
+   609   000D90                     
+   610                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 84:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/exa
+      +                          men3/examen3.X/main.c: 85:            LATAbits.LA1=0;
+   611   000D90  9289               	bcf	137,1,c	;volatile
+   612                           
+   613                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 86:            LATAbits.LA0=1;
+   614   000D92  8089               	bsf	137,0,c	;volatile
+   615   000D94  EFBC  F005         	goto	l1244
+   616   000D98  EF00  F000         	goto	start
+   617   000D9C                     __end_of_main:
+   618                           	callstack 0
+   619                           
+   620 ;; *************** function _tecladito *****************
+   621 ;; Defined at:
+   622 ;;		line 97 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/main.c"
+   623 ;; Parameters:    Size  Location     Type
+   624 ;;		None
+   625 ;; Auto vars:     Size  Location     Type
+   626 ;;  contador        2    1[COMRAM] int 
+   627 ;; Return value:  Size  Location     Type
+   628 ;;                  1    wreg      void 
+   629 ;; Registers used:
+   630 ;;		wreg, fsr2l, fsr2h, status,2, status,0
+   631 ;; Tracked objects:
+   632 ;;		On entry : 0/0
+   633 ;;		On exit  : 0/0
+   634 ;;		Unchanged: 0/0
+   635 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+   636 ;;      Params:         0       0       0       0       0       0       0       0       0
+   637 ;;      Locals:         2       0       0       0       0       0       0       0       0
+   638 ;;      Temps:          1       0       0       0       0       0       0       0       0
+   639 ;;      Totals:         3       0       0       0       0       0       0       0       0
+   640 ;;Total ram usage:        3 bytes
+   641 ;; Hardware stack levels used: 1
+   642 ;; This function calls:
+   643 ;;		Nothing
+   644 ;; This function is called by:
+   645 ;;		_main
+   646 ;; This function uses a non-reentrant model
+   647 ;;
+   648                           
+   649                           	psect	text1
+   650   000830                     __ptext1:
+   651                           	callstack 0
+   652   000830                     _tecladito:
+   653                           	callstack 30
+   654   000830                     
+   655                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 98:     int contador = 0;
+   656   000830  0E00               	movlw	0
+   657   000832  6E0F               	movwf	(tecladito@contador+1)^0,c
+   658   000834  0E00               	movlw	0
+   659   000836  6E0E               	movwf	tecladito@contador^0,c
+   660                           
+   661                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 99:     while(contador<4)
+   662   000838  EF9E  F005         	goto	l990
+   663   00083C                     l854:
+   664                           
+   665                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 100:     {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen
+      +                          3/examen3.X/main.c: 102:         _delay((unsigned long)((10)*(20000000/4000.0)));
+   666   00083C  0E41               	movlw	65
+   667   00083E  6E0D               	movwf	??_tecladito^0,c
+   668   000840  0EEE               	movlw	238
+   669   000842                     u707:
+   670   000842  2EE8               	decfsz	wreg,f,c
+   671   000844  D7FE               	bra	u707
+   672   000846  2E0D               	decfsz	??_tecladito^0,f,c
+   673   000848  D7FC               	bra	u707
+   674   00084A  D000               	nop2	
+   675   00084C                     
+   676                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 103:         LATDbits.LD0 = 1;
+   677   00084C  808C               	bsf	140,0,c	;volatile
+   678   00084E                     
+   679                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 104:         LATDbits.LD1 = 0;
+   680   00084E  928C               	bcf	140,1,c	;volatile
+   681   000850                     
+   682                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 105:         LATDbits.LD2 = 0;
+   683   000850  948C               	bcf	140,2,c	;volatile
+   684   000852                     
+   685                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 106:         LATDbits.LD3 = 0;
+   686   000852  968C               	bcf	140,3,c	;volatile
+   687   000854                     
+   688                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 108:         if(PORTDbits.RD7==1)
+   689   000854  AE83               	btfss	131,7,c	;volatile
+   690   000856  EF2F  F004         	goto	u31
+   691   00085A  EF31  F004         	goto	u30
+   692   00085E                     u31:
+   693   00085E  EF47  F004         	goto	l872
+   694   000862                     u30:
+   695   000862                     l58:
+   696   000862  BA83               	btfsc	131,5,c	;volatile
+   697   000864  EF36  F004         	goto	u41
+   698   000868  EF38  F004         	goto	u40
+   699   00086C                     u41:
+   700   00086C  EF31  F004         	goto	l58
+   701   000870                     u40:
+   702   000870                     
+   703                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 111:             teclado[contador]=3;
+   704   000870  90D8               	bcf	status,0,c
+   705   000872  340E               	rlcf	tecladito@contador^0,w,c
+   706   000874  6ED9               	movwf	fsr2l,c
+   707   000876  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   708   000878  6EDA               	movwf	fsr2h,c
+   709   00087A  0E01               	movlw	low _teclado
+   710   00087C  26D9               	addwf	fsr2l,f,c
+   711   00087E  0E00               	movlw	high _teclado
+   712   000880  22DA               	addwfc	fsr2h,f,c
+   713   000882  0E03               	movlw	3
+   714   000884  6EDE               	movwf	postinc2,c
+   715   000886  0E00               	movlw	0
+   716   000888  6EDD               	movwf	postdec2,c
+   717   00088A                     
+   718                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 112:             contador++;
+   719   00088A  4A0E               	infsnz	tecladito@contador^0,f,c
+   720   00088C  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   721   00088E                     l872:
+   722                           
+   723                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 117:         if(PORTDbits.RD6==1)
+   724   00088E  AC83               	btfss	131,6,c	;volatile
+   725   000890  EF4C  F004         	goto	u51
+   726   000894  EF4E  F004         	goto	u50
+   727   000898                     u51:
+   728   000898  EF64  F004         	goto	l880
+   729   00089C                     u50:
+   730   00089C                     l62:
+   731   00089C  BC83               	btfsc	131,6,c	;volatile
+   732   00089E  EF53  F004         	goto	u61
+   733   0008A2  EF55  F004         	goto	u60
+   734   0008A6                     u61:
+   735   0008A6  EF4E  F004         	goto	l62
+   736   0008AA                     u60:
+   737   0008AA                     
+   738                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 120:            teclado[contador]=2;
+   739   0008AA  90D8               	bcf	status,0,c
+   740   0008AC  340E               	rlcf	tecladito@contador^0,w,c
+   741   0008AE  6ED9               	movwf	fsr2l,c
+   742   0008B0  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   743   0008B2  6EDA               	movwf	fsr2h,c
+   744   0008B4  0E01               	movlw	low _teclado
+   745   0008B6  26D9               	addwf	fsr2l,f,c
+   746   0008B8  0E00               	movlw	high _teclado
+   747   0008BA  22DA               	addwfc	fsr2h,f,c
+   748   0008BC  0E02               	movlw	2
+   749   0008BE  6EDE               	movwf	postinc2,c
+   750   0008C0  0E00               	movlw	0
+   751   0008C2  6EDD               	movwf	postdec2,c
+   752   0008C4                     
+   753                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 121:            contador++;
+   754   0008C4  4A0E               	infsnz	tecladito@contador^0,f,c
+   755   0008C6  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   756   0008C8                     l880:
+   757                           
+   758                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 124:         if(PORTDbits.RD5==1)
+   759   0008C8  AA83               	btfss	131,5,c	;volatile
+   760   0008CA  EF69  F004         	goto	u71
+   761   0008CE  EF6B  F004         	goto	u70
+   762   0008D2                     u71:
+   763   0008D2  EF81  F004         	goto	l886
+   764   0008D6                     u70:
+   765   0008D6                     
+   766                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 125:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 126:             teclado[contador]=1;
+   767   0008D6  90D8               	bcf	status,0,c
+   768   0008D8  340E               	rlcf	tecladito@contador^0,w,c
+   769   0008DA  6ED9               	movwf	fsr2l,c
+   770   0008DC  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   771   0008DE  6EDA               	movwf	fsr2h,c
+   772   0008E0  0E01               	movlw	low _teclado
+   773   0008E2  26D9               	addwf	fsr2l,f,c
+   774   0008E4  0E00               	movlw	high _teclado
+   775   0008E6  22DA               	addwfc	fsr2h,f,c
+   776   0008E8  0E01               	movlw	1
+   777   0008EA  6EDE               	movwf	postinc2,c
+   778   0008EC  0E00               	movlw	0
+   779   0008EE  6EDD               	movwf	postdec2,c
+   780   0008F0                     l66:
+   781   0008F0  BA83               	btfsc	131,5,c	;volatile
+   782   0008F2  EF7D  F004         	goto	u81
+   783   0008F6  EF7F  F004         	goto	u80
+   784   0008FA                     u81:
+   785   0008FA  EF78  F004         	goto	l66
+   786   0008FE                     u80:
+   787   0008FE                     
+   788                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 128:             contador++;
+   789   0008FE  4A0E               	infsnz	tecladito@contador^0,f,c
+   790   000900  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   791   000902                     l886:
+   792                           
+   793                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 130:         if(PORTDbits.RD4==1)
+   794   000902  A883               	btfss	131,4,c	;volatile
+   795   000904  EF86  F004         	goto	u91
+   796   000908  EF88  F004         	goto	u90
+   797   00090C                     u91:
+   798   00090C  EF8A  F004         	goto	l890
+   799   000910                     u90:
+   800   000910                     
+   801                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 131:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 133:             contador++;
+   802   000910  4A0E               	infsnz	tecladito@contador^0,f,c
+   803   000912  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   804   000914                     l890:
+   805                           
+   806                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 135:         _delay((unsigned long)((10)*(20000000/4000.0)));
+   807   000914  0E41               	movlw	65
+   808   000916  6E0D               	movwf	??_tecladito^0,c
+   809   000918  0EEE               	movlw	238
+   810   00091A                     u717:
+   811   00091A  2EE8               	decfsz	wreg,f,c
+   812   00091C  D7FE               	bra	u717
+   813   00091E  2E0D               	decfsz	??_tecladito^0,f,c
+   814   000920  D7FC               	bra	u717
+   815   000922  D000               	nop2	
+   816   000924                     
+   817                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 136:         LATDbits.LD0 = 0;
+   818   000924  908C               	bcf	140,0,c	;volatile
+   819   000926                     
+   820                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 137:         LATDbits.LD1 = 1;
+   821   000926  828C               	bsf	140,1,c	;volatile
+   822   000928                     
+   823                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 138:         LATDbits.LD2 = 0;
+   824   000928  948C               	bcf	140,2,c	;volatile
+   825   00092A                     
+   826                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 139:         LATDbits.LD3 = 0;
+   827   00092A  968C               	bcf	140,3,c	;volatile
+   828   00092C                     
+   829                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 140:         if(PORTDbits.RD7==1)
+   830   00092C  AE83               	btfss	131,7,c	;volatile
+   831   00092E  EF9B  F004         	goto	u101
+   832   000932  EF9D  F004         	goto	u100
+   833   000936                     u101:
+   834   000936  EFAC  F004         	goto	l906
+   835   00093A                     u100:
+   836   00093A                     
+   837                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 141:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 142:             teclado[contador]=6;
+   838   00093A  90D8               	bcf	status,0,c
+   839   00093C  340E               	rlcf	tecladito@contador^0,w,c
+   840   00093E  6ED9               	movwf	fsr2l,c
+   841   000940  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   842   000942  6EDA               	movwf	fsr2h,c
+   843   000944  0E01               	movlw	low _teclado
+   844   000946  26D9               	addwf	fsr2l,f,c
+   845   000948  0E00               	movlw	high _teclado
+   846   00094A  22DA               	addwfc	fsr2h,f,c
+   847   00094C  0E06               	movlw	6
+   848   00094E  6EDE               	movwf	postinc2,c
+   849   000950  0E00               	movlw	0
+   850   000952  6EDD               	movwf	postdec2,c
+   851   000954                     
+   852                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 143:             contador++;
+   853   000954  4A0E               	infsnz	tecladito@contador^0,f,c
+   854   000956  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   855   000958                     l906:
+   856                           
+   857                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 145:         if(PORTDbits.RD6==1)
+   858   000958  AC83               	btfss	131,6,c	;volatile
+   859   00095A  EFB1  F004         	goto	u111
+   860   00095E  EFB3  F004         	goto	u110
+   861   000962                     u111:
+   862   000962  EFC2  F004         	goto	l912
+   863   000966                     u110:
+   864   000966                     
+   865                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 146:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 147:             teclado[contador]=5;
+   866   000966  90D8               	bcf	status,0,c
+   867   000968  340E               	rlcf	tecladito@contador^0,w,c
+   868   00096A  6ED9               	movwf	fsr2l,c
+   869   00096C  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   870   00096E  6EDA               	movwf	fsr2h,c
+   871   000970  0E01               	movlw	low _teclado
+   872   000972  26D9               	addwf	fsr2l,f,c
+   873   000974  0E00               	movlw	high _teclado
+   874   000976  22DA               	addwfc	fsr2h,f,c
+   875   000978  0E05               	movlw	5
+   876   00097A  6EDE               	movwf	postinc2,c
+   877   00097C  0E00               	movlw	0
+   878   00097E  6EDD               	movwf	postdec2,c
+   879   000980                     
+   880                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 148:             contador++;
+   881   000980  4A0E               	infsnz	tecladito@contador^0,f,c
+   882   000982  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   883   000984                     l912:
+   884                           
+   885                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 150:         if(PORTDbits.RD5==1)
+   886   000984  AA83               	btfss	131,5,c	;volatile
+   887   000986  EFC7  F004         	goto	u121
+   888   00098A  EFC9  F004         	goto	u120
+   889   00098E                     u121:
+   890   00098E  EFDF  F004         	goto	l920
+   891   000992                     u120:
+   892   000992                     l73:
+   893   000992  BA83               	btfsc	131,5,c	;volatile
+   894   000994  EFCE  F004         	goto	u131
+   895   000998  EFD0  F004         	goto	u130
+   896   00099C                     u131:
+   897   00099C  EFC9  F004         	goto	l73
+   898   0009A0                     u130:
+   899   0009A0                     
+   900                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 153:             teclado[contador]=4;
+   901   0009A0  90D8               	bcf	status,0,c
+   902   0009A2  340E               	rlcf	tecladito@contador^0,w,c
+   903   0009A4  6ED9               	movwf	fsr2l,c
+   904   0009A6  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   905   0009A8  6EDA               	movwf	fsr2h,c
+   906   0009AA  0E01               	movlw	low _teclado
+   907   0009AC  26D9               	addwf	fsr2l,f,c
+   908   0009AE  0E00               	movlw	high _teclado
+   909   0009B0  22DA               	addwfc	fsr2h,f,c
+   910   0009B2  0E04               	movlw	4
+   911   0009B4  6EDE               	movwf	postinc2,c
+   912   0009B6  0E00               	movlw	0
+   913   0009B8  6EDD               	movwf	postdec2,c
+   914   0009BA                     
+   915                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 154:             contador++;
+   916   0009BA  4A0E               	infsnz	tecladito@contador^0,f,c
+   917   0009BC  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   918   0009BE                     l920:
+   919                           
+   920                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 156:         if(PORTDbits.RD4==1)
+   921   0009BE  A883               	btfss	131,4,c	;volatile
+   922   0009C0  EFE4  F004         	goto	u141
+   923   0009C4  EFE6  F004         	goto	u140
+   924   0009C8                     u141:
+   925   0009C8  EFE8  F004         	goto	l924
+   926   0009CC                     u140:
+   927   0009CC                     
+   928                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 157:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 159:            contador++;
+   929   0009CC  4A0E               	infsnz	tecladito@contador^0,f,c
+   930   0009CE  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   931   0009D0                     l924:
+   932                           
+   933                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 161:         _delay((unsigned long)((10)*(20000000/4000.0)));
+   934   0009D0  0E41               	movlw	65
+   935   0009D2  6E0D               	movwf	??_tecladito^0,c
+   936   0009D4  0EEE               	movlw	238
+   937   0009D6                     u727:
+   938   0009D6  2EE8               	decfsz	wreg,f,c
+   939   0009D8  D7FE               	bra	u727
+   940   0009DA  2E0D               	decfsz	??_tecladito^0,f,c
+   941   0009DC  D7FC               	bra	u727
+   942   0009DE  D000               	nop2	
+   943   0009E0                     
+   944                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 162:         LATDbits.LD0 = 0;
+   945   0009E0  908C               	bcf	140,0,c	;volatile
+   946   0009E2                     
+   947                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 163:         LATDbits.LD1 = 0;
+   948   0009E2  928C               	bcf	140,1,c	;volatile
+   949   0009E4                     
+   950                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 164:         LATDbits.LD2 = 1;
+   951   0009E4  848C               	bsf	140,2,c	;volatile
+   952   0009E6                     
+   953                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 165:         LATDbits.LD3 = 0;
+   954   0009E6  968C               	bcf	140,3,c	;volatile
+   955   0009E8                     
+   956                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 166:         if(PORTDbits.RD7==1)
+   957   0009E8  AE83               	btfss	131,7,c	;volatile
+   958   0009EA  EFF9  F004         	goto	u151
+   959   0009EE  EFFB  F004         	goto	u150
+   960   0009F2                     u151:
+   961   0009F2  EF0A  F005         	goto	l940
+   962   0009F6                     u150:
+   963   0009F6                     
+   964                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 167:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 168:             teclado[contador]=9;
+   965   0009F6  90D8               	bcf	status,0,c
+   966   0009F8  340E               	rlcf	tecladito@contador^0,w,c
+   967   0009FA  6ED9               	movwf	fsr2l,c
+   968   0009FC  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   969   0009FE  6EDA               	movwf	fsr2h,c
+   970   000A00  0E01               	movlw	low _teclado
+   971   000A02  26D9               	addwf	fsr2l,f,c
+   972   000A04  0E00               	movlw	high _teclado
+   973   000A06  22DA               	addwfc	fsr2h,f,c
+   974   000A08  0E09               	movlw	9
+   975   000A0A  6EDE               	movwf	postinc2,c
+   976   000A0C  0E00               	movlw	0
+   977   000A0E  6EDD               	movwf	postdec2,c
+   978   000A10                     
+   979                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 169:             contador++;
+   980   000A10  4A0E               	infsnz	tecladito@contador^0,f,c
+   981   000A12  2A0F               	incf	(tecladito@contador+1)^0,f,c
+   982   000A14                     l940:
+   983                           
+   984                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 171:         if(PORTDbits.RD6==1)
+   985   000A14  AC83               	btfss	131,6,c	;volatile
+   986   000A16  EF0F  F005         	goto	u161
+   987   000A1A  EF11  F005         	goto	u160
+   988   000A1E                     u161:
+   989   000A1E  EF20  F005         	goto	l946
+   990   000A22                     u160:
+   991   000A22                     
+   992                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 172:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 173:             teclado[contador]=8;
+   993   000A22  90D8               	bcf	status,0,c
+   994   000A24  340E               	rlcf	tecladito@contador^0,w,c
+   995   000A26  6ED9               	movwf	fsr2l,c
+   996   000A28  340F               	rlcf	(tecladito@contador+1)^0,w,c
+   997   000A2A  6EDA               	movwf	fsr2h,c
+   998   000A2C  0E01               	movlw	low _teclado
+   999   000A2E  26D9               	addwf	fsr2l,f,c
+  1000   000A30  0E00               	movlw	high _teclado
+  1001   000A32  22DA               	addwfc	fsr2h,f,c
+  1002   000A34  0E08               	movlw	8
+  1003   000A36  6EDE               	movwf	postinc2,c
+  1004   000A38  0E00               	movlw	0
+  1005   000A3A  6EDD               	movwf	postdec2,c
+  1006   000A3C                     
+  1007                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 174:             contador++;
+  1008   000A3C  4A0E               	infsnz	tecladito@contador^0,f,c
+  1009   000A3E  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1010   000A40                     l946:
+  1011                           
+  1012                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 176:         if(PORTDbits.RD5==1)
+  1013   000A40  AA83               	btfss	131,5,c	;volatile
+  1014   000A42  EF25  F005         	goto	u171
+  1015   000A46  EF27  F005         	goto	u170
+  1016   000A4A                     u171:
+  1017   000A4A  EF36  F005         	goto	l952
+  1018   000A4E                     u170:
+  1019   000A4E                     
+  1020                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 177:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 178:            teclado[contador]=7;
+  1021   000A4E  90D8               	bcf	status,0,c
+  1022   000A50  340E               	rlcf	tecladito@contador^0,w,c
+  1023   000A52  6ED9               	movwf	fsr2l,c
+  1024   000A54  340F               	rlcf	(tecladito@contador+1)^0,w,c
+  1025   000A56  6EDA               	movwf	fsr2h,c
+  1026   000A58  0E01               	movlw	low _teclado
+  1027   000A5A  26D9               	addwf	fsr2l,f,c
+  1028   000A5C  0E00               	movlw	high _teclado
+  1029   000A5E  22DA               	addwfc	fsr2h,f,c
+  1030   000A60  0E07               	movlw	7
+  1031   000A62  6EDE               	movwf	postinc2,c
+  1032   000A64  0E00               	movlw	0
+  1033   000A66  6EDD               	movwf	postdec2,c
+  1034   000A68                     
+  1035                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 179:             contador++;
+  1036   000A68  4A0E               	infsnz	tecladito@contador^0,f,c
+  1037   000A6A  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1038   000A6C                     l952:
+  1039                           
+  1040                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 181:         if(PORTDbits.RD4==1)
+  1041   000A6C  A883               	btfss	131,4,c	;volatile
+  1042   000A6E  EF3B  F005         	goto	u181
+  1043   000A72  EF3D  F005         	goto	u180
+  1044   000A76                     u181:
+  1045   000A76  EF3F  F005         	goto	l956
+  1046   000A7A                     u180:
+  1047   000A7A                     
+  1048                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 182:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 184:            contador++;
+  1049   000A7A  4A0E               	infsnz	tecladito@contador^0,f,c
+  1050   000A7C  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1051   000A7E                     l956:
+  1052                           
+  1053                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 186:         _delay((unsigned long)((10)*(20000000/4000.0)));
+  1054   000A7E  0E41               	movlw	65
+  1055   000A80  6E0D               	movwf	??_tecladito^0,c
+  1056   000A82  0EEE               	movlw	238
+  1057   000A84                     u737:
+  1058   000A84  2EE8               	decfsz	wreg,f,c
+  1059   000A86  D7FE               	bra	u737
+  1060   000A88  2E0D               	decfsz	??_tecladito^0,f,c
+  1061   000A8A  D7FC               	bra	u737
+  1062   000A8C  D000               	nop2	
+  1063   000A8E                     
+  1064                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 187:         LATDbits.LD0 = 0;
+  1065   000A8E  908C               	bcf	140,0,c	;volatile
+  1066   000A90                     
+  1067                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 188:         LATDbits.LD1 = 0;
+  1068   000A90  928C               	bcf	140,1,c	;volatile
+  1069   000A92                     
+  1070                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 189:         LATDbits.LD2 = 0;
+  1071   000A92  948C               	bcf	140,2,c	;volatile
+  1072   000A94                     
+  1073                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 190:         LATDbits.LD3 = 1;
+  1074   000A94  868C               	bsf	140,3,c	;volatile
+  1075   000A96                     
+  1076                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 191:         if(PORTDbits.RD7==1)
+  1077   000A96  AE83               	btfss	131,7,c	;volatile
+  1078   000A98  EF50  F005         	goto	u191
+  1079   000A9C  EF52  F005         	goto	u190
+  1080   000AA0                     u191:
+  1081   000AA0  EF54  F005         	goto	l970
+  1082   000AA4                     u190:
+  1083   000AA4                     
+  1084                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 192:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 194:             contador++;
+  1085   000AA4  4A0E               	infsnz	tecladito@contador^0,f,c
+  1086   000AA6  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1087   000AA8                     l970:
+  1088                           
+  1089                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 196:         if(PORTDbits.RD6==1)
+  1090   000AA8  AC83               	btfss	131,6,c	;volatile
+  1091   000AAA  EF59  F005         	goto	u201
+  1092   000AAE  EF5B  F005         	goto	u200
+  1093   000AB2                     u201:
+  1094   000AB2  EF6A  F005         	goto	l976
+  1095   000AB6                     u200:
+  1096   000AB6                     
+  1097                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 197:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 198:            teclado[contador]=0;
+  1098   000AB6  90D8               	bcf	status,0,c
+  1099   000AB8  340E               	rlcf	tecladito@contador^0,w,c
+  1100   000ABA  6ED9               	movwf	fsr2l,c
+  1101   000ABC  340F               	rlcf	(tecladito@contador+1)^0,w,c
+  1102   000ABE  6EDA               	movwf	fsr2h,c
+  1103   000AC0  0E01               	movlw	low _teclado
+  1104   000AC2  26D9               	addwf	fsr2l,f,c
+  1105   000AC4  0E00               	movlw	high _teclado
+  1106   000AC6  22DA               	addwfc	fsr2h,f,c
+  1107   000AC8  0E00               	movlw	0
+  1108   000ACA  6EDE               	movwf	postinc2,c
+  1109   000ACC  0E00               	movlw	0
+  1110   000ACE  6EDD               	movwf	postdec2,c
+  1111   000AD0                     
+  1112                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 199:             contador++;
+  1113   000AD0  4A0E               	infsnz	tecladito@contador^0,f,c
+  1114   000AD2  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1115   000AD4                     l976:
+  1116                           
+  1117                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 201:         if(PORTDbits.RD5==1)
+  1118   000AD4  AA83               	btfss	131,5,c	;volatile
+  1119   000AD6  EF6F  F005         	goto	u211
+  1120   000ADA  EF71  F005         	goto	u210
+  1121   000ADE                     u211:
+  1122   000ADE  EF73  F005         	goto	l980
+  1123   000AE2                     u210:
+  1124   000AE2                     
+  1125                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 202:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 204:             contador++;
+  1126   000AE2  4A0E               	infsnz	tecladito@contador^0,f,c
+  1127   000AE4  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1128   000AE6                     l980:
+  1129                           
+  1130                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 206:         if(PORTDbits.RD4==1)
+  1131   000AE6  A883               	btfss	131,4,c	;volatile
+  1132   000AE8  EF78  F005         	goto	u221
+  1133   000AEC  EF7A  F005         	goto	u220
+  1134   000AF0                     u221:
+  1135   000AF0  EF7C  F005         	goto	l984
+  1136   000AF4                     u220:
+  1137   000AF4                     
+  1138                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 207:         {;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/ex
+      +                          amen3/examen3.X/main.c: 208:             contador++;
+  1139   000AF4  4A0E               	infsnz	tecladito@contador^0,f,c
+  1140   000AF6  2A0F               	incf	(tecladito@contador+1)^0,f,c
+  1141   000AF8                     l984:
+  1142                           
+  1143                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 210:         if(PORTAbits.RA2==1)
+  1144   000AF8  A480               	btfss	128,2,c	;volatile
+  1145   000AFA  EF81  F005         	goto	u231
+  1146   000AFE  EF83  F005         	goto	u230
+  1147   000B02                     u231:
+  1148   000B02  EF9E  F005         	goto	l990
+  1149   000B06                     u230:
+  1150   000B06                     l86:
+  1151   000B06  B480               	btfsc	128,2,c	;volatile
+  1152   000B08  EF88  F005         	goto	u241
+  1153   000B0C  EF8A  F005         	goto	u240
+  1154   000B10                     u241:
+  1155   000B10  EF83  F005         	goto	l86
+  1156   000B14                     u240:
+  1157   000B14                     
+  1158                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 213:             teclado[0]=1;
+  1159   000B14  0E00               	movlw	0
+  1160   000B16  6E02               	movwf	(_teclado+1)^0,c
+  1161   000B18  0E01               	movlw	1
+  1162   000B1A  6E01               	movwf	_teclado^0,c
+  1163                           
+  1164                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 214:             teclado[1]=2;
+  1165   000B1C  0E00               	movlw	0
+  1166   000B1E  6E04               	movwf	(_teclado+3)^0,c
+  1167   000B20  0E02               	movlw	2
+  1168   000B22  6E03               	movwf	(_teclado+2)^0,c
+  1169                           
+  1170                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 215:             teclado[2]=3;
+  1171   000B24  0E00               	movlw	0
+  1172   000B26  6E06               	movwf	(_teclado+5)^0,c
+  1173   000B28  0E03               	movlw	3
+  1174   000B2A  6E05               	movwf	(_teclado+4)^0,c
+  1175                           
+  1176                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 216:             teclado[3]=4;
+  1177   000B2C  0E00               	movlw	0
+  1178   000B2E  6E08               	movwf	(_teclado+7)^0,c
+  1179   000B30  0E04               	movlw	4
+  1180   000B32  6E07               	movwf	(_teclado+6)^0,c
+  1181                           
+  1182                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 217:             contador=4;
+  1183   000B34  0E00               	movlw	0
+  1184   000B36  6E0F               	movwf	(tecladito@contador+1)^0,c
+  1185   000B38  0E04               	movlw	4
+  1186   000B3A  6E0E               	movwf	tecladito@contador^0,c
+  1187   000B3C                     l990:
+  1188                           
+  1189                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/mai
+      +                          n.c: 99:     while(contador<4)
+  1190   000B3C  BE0F               	btfsc	(tecladito@contador+1)^0,7,c
+  1191   000B3E  EFAA  F005         	goto	u251
+  1192   000B42  500F               	movf	(tecladito@contador+1)^0,w,c
+  1193   000B44  E109               	bnz	u250
+  1194   000B46  0E04               	movlw	4
+  1195   000B48  5C0E               	subwf	tecladito@contador^0,w,c
+  1196   000B4A  A0D8               	btfss	status,0,c
+  1197   000B4C  EFAA  F005         	goto	u251
+  1198   000B50  EFAC  F005         	goto	u250
+  1199   000B54                     u251:
+  1200   000B54  EF1E  F004         	goto	l854
+  1201   000B58                     u250:
+  1202   000B58  0012               	return		;funcret
+  1203   000B5A                     __end_of_tecladito:
+  1204                           	callstack 0
+  1205                           
+  1206 ;; *************** function ___awdiv *****************
+  1207 ;; Defined at:
+  1208 ;;		line 7 in file "C:\Program Files\Microchip\xc8\v2.40\pic\sources\c99\common\awdiv.c"
+  1209 ;; Parameters:    Size  Location     Type
+  1210 ;;  dividend        2    0[COMRAM] int 
+  1211 ;;  divisor         2    2[COMRAM] int 
+  1212 ;; Auto vars:     Size  Location     Type
+  1213 ;;  quotient        2    6[COMRAM] int 
+  1214 ;;  sign            1    5[COMRAM] unsigned char 
+  1215 ;;  counter         1    4[COMRAM] unsigned char 
+  1216 ;; Return value:  Size  Location     Type
+  1217 ;;                  2    0[COMRAM] int 
+  1218 ;; Registers used:
+  1219 ;;		wreg, status,2, status,0
+  1220 ;; Tracked objects:
+  1221 ;;		On entry : 0/0
+  1222 ;;		On exit  : 0/0
+  1223 ;;		Unchanged: 0/0
+  1224 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1225 ;;      Params:         4       0       0       0       0       0       0       0       0
+  1226 ;;      Locals:         4       0       0       0       0       0       0       0       0
+  1227 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1228 ;;      Totals:         8       0       0       0       0       0       0       0       0
+  1229 ;;Total ram usage:        8 bytes
+  1230 ;; Hardware stack levels used: 1
+  1231 ;; This function calls:
+  1232 ;;		Nothing
+  1233 ;; This function is called by:
+  1234 ;;		_main
+  1235 ;; This function uses a non-reentrant model
+  1236 ;;
+  1237                           
+  1238                           	psect	text2
+  1239   000D9C                     __ptext2:
+  1240                           	callstack 0
+  1241   000D9C                     ___awdiv:
+  1242                           	callstack 30
+  1243   000D9C  0E00               	movlw	0
+  1244   000D9E  6E12               	movwf	___awdiv@sign^0,c
+  1245   000DA0  BE10               	btfsc	(___awdiv@divisor+1)^0,7,c
+  1246   000DA2  EFD7  F006         	goto	u480
+  1247   000DA6  EFD5  F006         	goto	u481
+  1248   000DAA                     u481:
+  1249   000DAA  EFDD  F006         	goto	l1198
+  1250   000DAE                     u480:
+  1251   000DAE  6C0F               	negf	___awdiv@divisor^0,c
+  1252   000DB0  1E10               	comf	(___awdiv@divisor+1)^0,f,c
+  1253   000DB2  B0D8               	btfsc	status,0,c
+  1254   000DB4  2A10               	incf	(___awdiv@divisor+1)^0,f,c
+  1255   000DB6  0E01               	movlw	1
+  1256   000DB8  6E12               	movwf	___awdiv@sign^0,c
+  1257   000DBA                     l1198:
+  1258   000DBA  BE0E               	btfsc	(___awdiv@dividend+1)^0,7,c
+  1259   000DBC  EFE4  F006         	goto	u490
+  1260   000DC0  EFE2  F006         	goto	u491
+  1261   000DC4                     u491:
+  1262   000DC4  EFEA  F006         	goto	l1204
+  1263   000DC8                     u490:
+  1264   000DC8  6C0D               	negf	___awdiv@dividend^0,c
+  1265   000DCA  1E0E               	comf	(___awdiv@dividend+1)^0,f,c
+  1266   000DCC  B0D8               	btfsc	status,0,c
+  1267   000DCE  2A0E               	incf	(___awdiv@dividend+1)^0,f,c
+  1268   000DD0  0E01               	movlw	1
+  1269   000DD2  1A12               	xorwf	___awdiv@sign^0,f,c
+  1270   000DD4                     l1204:
+  1271   000DD4  0E00               	movlw	0
+  1272   000DD6  6E14               	movwf	(___awdiv@quotient+1)^0,c
+  1273   000DD8  0E00               	movlw	0
+  1274   000DDA  6E13               	movwf	___awdiv@quotient^0,c
+  1275   000DDC  500F               	movf	___awdiv@divisor^0,w,c
+  1276   000DDE  1010               	iorwf	(___awdiv@divisor+1)^0,w,c
+  1277   000DE0  B4D8               	btfsc	status,2,c
+  1278   000DE2  EFF5  F006         	goto	u501
+  1279   000DE6  EFF7  F006         	goto	u500
+  1280   000DEA                     u501:
+  1281   000DEA  EF1F  F007         	goto	l1226
+  1282   000DEE                     u500:
+  1283   000DEE  0E01               	movlw	1
+  1284   000DF0  6E11               	movwf	___awdiv@counter^0,c
+  1285   000DF2  EFFF  F006         	goto	l1212
+  1286   000DF6                     l1210:
+  1287   000DF6  90D8               	bcf	status,0,c
+  1288   000DF8  360F               	rlcf	___awdiv@divisor^0,f,c
+  1289   000DFA  3610               	rlcf	(___awdiv@divisor+1)^0,f,c
+  1290   000DFC  2A11               	incf	___awdiv@counter^0,f,c
+  1291   000DFE                     l1212:
+  1292   000DFE  AE10               	btfss	(___awdiv@divisor+1)^0,7,c
+  1293   000E00  EF04  F007         	goto	u511
+  1294   000E04  EF06  F007         	goto	u510
+  1295   000E08                     u511:
+  1296   000E08  EFFB  F006         	goto	l1210
+  1297   000E0C                     u510:
+  1298   000E0C                     l1214:
+  1299   000E0C  90D8               	bcf	status,0,c
+  1300   000E0E  3613               	rlcf	___awdiv@quotient^0,f,c
+  1301   000E10  3614               	rlcf	(___awdiv@quotient+1)^0,f,c
+  1302   000E12  500F               	movf	___awdiv@divisor^0,w,c
+  1303   000E14  5C0D               	subwf	___awdiv@dividend^0,w,c
+  1304   000E16  5010               	movf	(___awdiv@divisor+1)^0,w,c
+  1305   000E18  580E               	subwfb	(___awdiv@dividend+1)^0,w,c
+  1306   000E1A  A0D8               	btfss	status,0,c
+  1307   000E1C  EF12  F007         	goto	u521
+  1308   000E20  EF14  F007         	goto	u520
+  1309   000E24                     u521:
+  1310   000E24  EF19  F007         	goto	l1222
+  1311   000E28                     u520:
+  1312   000E28  500F               	movf	___awdiv@divisor^0,w,c
+  1313   000E2A  5E0D               	subwf	___awdiv@dividend^0,f,c
+  1314   000E2C  5010               	movf	(___awdiv@divisor+1)^0,w,c
+  1315   000E2E  5A0E               	subwfb	(___awdiv@dividend+1)^0,f,c
+  1316   000E30  8013               	bsf	___awdiv@quotient^0,0,c
+  1317   000E32                     l1222:
+  1318   000E32  90D8               	bcf	status,0,c
+  1319   000E34  3210               	rrcf	(___awdiv@divisor+1)^0,f,c
+  1320   000E36  320F               	rrcf	___awdiv@divisor^0,f,c
+  1321   000E38  2E11               	decfsz	___awdiv@counter^0,f,c
+  1322   000E3A  EF06  F007         	goto	l1214
+  1323   000E3E                     l1226:
+  1324   000E3E  5012               	movf	___awdiv@sign^0,w,c
+  1325   000E40  B4D8               	btfsc	status,2,c
+  1326   000E42  EF25  F007         	goto	u531
+  1327   000E46  EF27  F007         	goto	u530
+  1328   000E4A                     u531:
+  1329   000E4A  EF2B  F007         	goto	l1230
+  1330   000E4E                     u530:
+  1331   000E4E  6C13               	negf	___awdiv@quotient^0,c
+  1332   000E50  1E14               	comf	(___awdiv@quotient+1)^0,f,c
+  1333   000E52  B0D8               	btfsc	status,0,c
+  1334   000E54  2A14               	incf	(___awdiv@quotient+1)^0,f,c
+  1335   000E56                     l1230:
+  1336   000E56  C013  F00D         	movff	___awdiv@quotient,?___awdiv
+  1337   000E5A  C014  F00E         	movff	___awdiv@quotient+1,?___awdiv+1
+  1338   000E5E  0012               	return		;funcret
+  1339   000E60                     __end_of___awdiv:
+  1340                           	callstack 0
+  1341                           
+  1342 ;; *************** function _LCDPutStr *****************
+  1343 ;; Defined at:
+  1344 ;;		line 97 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c"
+  1345 ;; Parameters:    Size  Location     Type
+  1346 ;;  ptr             2    4[COMRAM] PTR unsigned char 
+  1347 ;;		 -> STR_4(7), STR_3(16), STR_2(7), STR_1(15), 
+  1348 ;; Auto vars:     Size  Location     Type
+  1349 ;;		None
+  1350 ;; Return value:  Size  Location     Type
+  1351 ;;                  1    wreg      void 
+  1352 ;; Registers used:
+  1353 ;;		wreg, status,2, status,0, tblptrl, tblptrh, tblptru, cstack
+  1354 ;; Tracked objects:
+  1355 ;;		On entry : 0/0
+  1356 ;;		On exit  : 0/0
+  1357 ;;		Unchanged: 0/0
+  1358 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1359 ;;      Params:         2       0       0       0       0       0       0       0       0
+  1360 ;;      Locals:         0       0       0       0       0       0       0       0       0
+  1361 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1362 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1363 ;;Total ram usage:        2 bytes
+  1364 ;; Hardware stack levels used: 1
+  1365 ;; Hardware stack levels required when called: 2
+  1366 ;; This function calls:
+  1367 ;;		_LCDPutChar
+  1368 ;; This function is called by:
+  1369 ;;		_main
+  1370 ;; This function uses a non-reentrant model
+  1371 ;;
+  1372                           
+  1373                           	psect	text3
+  1374   000E9A                     __ptext3:
+  1375                           	callstack 0
+  1376   000E9A                     _LCDPutStr:
+  1377                           	callstack 28
+  1378   000E9A                     
+  1379                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 97:     void LCDPutStr(unsigned char *ptr);C:/Users/Roberto Fernandez/Documents/
+      +                          electronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 98:     {;C:/Users/Roberto Fer
+      +                          nandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 99:         w
+      +                          hile(*ptr) LCDPutChar(*(ptr++));
+  1380   000E9A  EF59  F007         	goto	l1188
+  1381   000E9E                     l1184:
+  1382   000E9E  C011  FFF6         	movff	LCDPutStr@ptr,tblptrl
+  1383   000EA2  C012  FFF7         	movff	LCDPutStr@ptr+1,tblptrh
+  1384   000EA6                     	if	0	;tblptru may be non-zero
+  1385   000EA6                     	endif
+  1386   000EA6                     	if	0	;tblptru may be non-zero
+  1387   000EA6                     	endif
+  1388   000EA6  0008               	tblrd		*
+  1389   000EA8  50F5               	movf	tablat,w,c
+  1390   000EAA  EC82  F007         	call	_LCDPutChar
+  1391   000EAE  4A11               	infsnz	LCDPutStr@ptr^0,f,c
+  1392   000EB0  2A12               	incf	(LCDPutStr@ptr+1)^0,f,c
+  1393   000EB2                     l1188:
+  1394   000EB2  C011  FFF6         	movff	LCDPutStr@ptr,tblptrl
+  1395   000EB6  C012  FFF7         	movff	LCDPutStr@ptr+1,tblptrh
+  1396   000EBA                     	if	0	;tblptru may be non-zero
+  1397   000EBA                     	endif
+  1398   000EBA                     	if	0	;tblptru may be non-zero
+  1399   000EBA                     	endif
+  1400   000EBA  0008               	tblrd		*
+  1401   000EBC  50F5               	movf	tablat,w,c
+  1402   000EBE  0900               	iorlw	0
+  1403   000EC0  A4D8               	btfss	status,2,c
+  1404   000EC2  EF65  F007         	goto	u471
+  1405   000EC6  EF67  F007         	goto	u470
+  1406   000ECA                     u471:
+  1407   000ECA  EF4F  F007         	goto	l1184
+  1408   000ECE                     u470:
+  1409   000ECE  0012               	return		;funcret
+  1410   000ED0                     __end_of_LCDPutStr:
+  1411                           	callstack 0
+  1412                           
+  1413 ;; *************** function _LCDPutChar *****************
+  1414 ;; Defined at:
+  1415 ;;		line 62 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c"
+  1416 ;; Parameters:    Size  Location     Type
+  1417 ;;  ch              1    wreg     unsigned char 
+  1418 ;; Auto vars:     Size  Location     Type
+  1419 ;;  ch              1    3[COMRAM] unsigned char 
+  1420 ;; Return value:  Size  Location     Type
+  1421 ;;                  1    wreg      void 
+  1422 ;; Registers used:
+  1423 ;;		wreg, status,2, status,0, cstack
+  1424 ;; Tracked objects:
+  1425 ;;		On entry : 0/0
+  1426 ;;		On exit  : 0/0
+  1427 ;;		Unchanged: 0/0
+  1428 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1429 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1430 ;;      Locals:         1       0       0       0       0       0       0       0       0
+  1431 ;;      Temps:          1       0       0       0       0       0       0       0       0
+  1432 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1433 ;;Total ram usage:        2 bytes
+  1434 ;; Hardware stack levels used: 1
+  1435 ;; Hardware stack levels required when called: 1
+  1436 ;; This function calls:
+  1437 ;;		_LCDWriteNibble
+  1438 ;; This function is called by:
+  1439 ;;		_LCDPutStr
+  1440 ;; This function uses a non-reentrant model
+  1441 ;;
+  1442                           
+  1443                           	psect	text4
+  1444   000F04                     __ptext4:
+  1445                           	callstack 0
+  1446   000F04                     _LCDPutChar:
+  1447                           	callstack 28
+  1448                           
+  1449                           ;incstack = 0
+  1450                           ;LCDPutChar@ch stored from wreg
+  1451   000F04  6E10               	movwf	LCDPutChar@ch^0,c
+  1452   000F06                     
+  1453                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 62:     void LCDPutChar(unsigned char ch);C:/Users/Roberto Fernandez/Documents/e
+      +                          lectronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 63:     {;C:/Users/Roberto Fern
+      +                          andez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 64:         _d
+      +                          elay((unsigned long)((5)*(2000000L/4000.0)));
+  1454   000F06  0E04               	movlw	4
+  1455   000F08  6E0F               	movwf	??_LCDPutChar^0,c
+  1456   000F0A  0E3E               	movlw	62
+  1457   000F0C                     u747:
+  1458   000F0C  2EE8               	decfsz	wreg,f,c
+  1459   000F0E  D7FE               	bra	u747
+  1460   000F10  2E0F               	decfsz	??_LCDPutChar^0,f,c
+  1461   000F12  D7FC               	bra	u747
+  1462   000F14                     
+  1463                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 65:         LCDWriteNibble(ch,1);
+  1464   000F14  0E01               	movlw	1
+  1465   000F16  6E0D               	movwf	LCDWriteNibble@b^0,c
+  1466   000F18  5010               	movf	LCDPutChar@ch^0,w,c
+  1467   000F1A  EC98  F007         	call	_LCDWriteNibble
+  1468   000F1E                     
+  1469                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 66:         ch = ch << 4;
+  1470   000F1E  3810               	swapf	LCDPutChar@ch^0,w,c
+  1471   000F20  0BF0               	andlw	240
+  1472   000F22  6E10               	movwf	LCDPutChar@ch^0,c
+  1473   000F24                     
+  1474                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 67:         LCDWriteNibble(ch,1);
+  1475   000F24  0E01               	movlw	1
+  1476   000F26  6E0D               	movwf	LCDWriteNibble@b^0,c
+  1477   000F28  5010               	movf	LCDPutChar@ch^0,w,c
+  1478   000F2A  EC98  F007         	call	_LCDWriteNibble
+  1479   000F2E  0012               	return		;funcret
+  1480   000F30                     __end_of_LCDPutChar:
+  1481                           	callstack 0
+  1482                           
+  1483 ;; *************** function _LCDInit *****************
+  1484 ;; Defined at:
+  1485 ;;		line 5 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c"
+  1486 ;; Parameters:    Size  Location     Type
+  1487 ;;		None
+  1488 ;; Auto vars:     Size  Location     Type
+  1489 ;;		None
+  1490 ;; Return value:  Size  Location     Type
+  1491 ;;                  1    wreg      void 
+  1492 ;; Registers used:
+  1493 ;;		wreg, status,2, status,0, cstack
+  1494 ;; Tracked objects:
+  1495 ;;		On entry : 0/0
+  1496 ;;		On exit  : 0/0
+  1497 ;;		Unchanged: 0/0
+  1498 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1499 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1500 ;;      Locals:         0       0       0       0       0       0       0       0       0
+  1501 ;;      Temps:          1       0       0       0       0       0       0       0       0
+  1502 ;;      Totals:         1       0       0       0       0       0       0       0       0
+  1503 ;;Total ram usage:        1 bytes
+  1504 ;; Hardware stack levels used: 1
+  1505 ;; Hardware stack levels required when called: 2
+  1506 ;; This function calls:
+  1507 ;;		_LCDPutCmd
+  1508 ;; This function is called by:
+  1509 ;;		_main
+  1510 ;; This function uses a non-reentrant model
+  1511 ;;
+  1512                           
+  1513                           	psect	text5
+  1514   000E60                     __ptext5:
+  1515                           	callstack 0
+  1516   000E60                     _LCDInit:
+  1517                           	callstack 28
+  1518   000E60                     
+  1519                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 15:         TRISB=0x0F;
+  1520   000E60  0E0F               	movlw	15
+  1521   000E62  6E93               	movwf	147,c	;volatile
+  1522   000E64                     
+  1523                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 16:         TRISBbits.RB2=0;
+  1524   000E64  9493               	bcf	147,2,c	;volatile
+  1525   000E66                     
+  1526                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 17:         TRISBbits.RB1=0;
+  1527   000E66  9293               	bcf	147,1,c	;volatile
+  1528   000E68                     
+  1529                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 18:         TRISBbits.RB0=0;
+  1530   000E68  9093               	bcf	147,0,c	;volatile
+  1531   000E6A                     
+  1532                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 21:         _delay((unsigned long)((15)*(2000000L/4000.0)));
+  1533   000E6A  0E0A               	movlw	10
+  1534   000E6C  6E11               	movwf	??_LCDInit^0,c
+  1535   000E6E  0EBC               	movlw	188
+  1536   000E70                     u757:
+  1537   000E70  2EE8               	decfsz	wreg,f,c
+  1538   000E72  D7FE               	bra	u757
+  1539   000E74  2E11               	decfsz	??_LCDInit^0,f,c
+  1540   000E76  D7FC               	bra	u757
+  1541   000E78  D000               	nop2	
+  1542   000E7A                     
+  1543                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 22:         LCDPutCmd(0x32);
+  1544   000E7A  0E32               	movlw	50
+  1545   000E7C  EC68  F007         	call	_LCDPutCmd
+  1546   000E80                     
+  1547                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 23:         LCDPutCmd(0x28);
+  1548   000E80  0E28               	movlw	40
+  1549   000E82  EC68  F007         	call	_LCDPutCmd
+  1550   000E86                     
+  1551                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 24:         LCDPutCmd(0x0C);
+  1552   000E86  0E0C               	movlw	12
+  1553   000E88  EC68  F007         	call	_LCDPutCmd
+  1554   000E8C                     
+  1555                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 25:         LCDPutCmd(0x01);
+  1556   000E8C  0E01               	movlw	1
+  1557   000E8E  EC68  F007         	call	_LCDPutCmd
+  1558   000E92                     
+  1559                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 26:         LCDPutCmd(0x06);
+  1560   000E92  0E06               	movlw	6
+  1561   000E94  EC68  F007         	call	_LCDPutCmd
+  1562   000E98  0012               	return		;funcret
+  1563   000E9A                     __end_of_LCDInit:
+  1564                           	callstack 0
+  1565                           
+  1566 ;; *************** function _LCDPutCmd *****************
+  1567 ;; Defined at:
+  1568 ;;		line 79 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c"
+  1569 ;; Parameters:    Size  Location     Type
+  1570 ;;  ch              1    wreg     unsigned char 
+  1571 ;; Auto vars:     Size  Location     Type
+  1572 ;;  ch              1    3[COMRAM] unsigned char 
+  1573 ;; Return value:  Size  Location     Type
+  1574 ;;                  1    wreg      void 
+  1575 ;; Registers used:
+  1576 ;;		wreg, status,2, status,0, cstack
+  1577 ;; Tracked objects:
+  1578 ;;		On entry : 0/0
+  1579 ;;		On exit  : 0/0
+  1580 ;;		Unchanged: 0/0
+  1581 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1582 ;;      Params:         0       0       0       0       0       0       0       0       0
+  1583 ;;      Locals:         1       0       0       0       0       0       0       0       0
+  1584 ;;      Temps:          1       0       0       0       0       0       0       0       0
+  1585 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1586 ;;Total ram usage:        2 bytes
+  1587 ;; Hardware stack levels used: 1
+  1588 ;; Hardware stack levels required when called: 1
+  1589 ;; This function calls:
+  1590 ;;		_LCDWriteNibble
+  1591 ;; This function is called by:
+  1592 ;;		_main
+  1593 ;;		_LCDInit
+  1594 ;; This function uses a non-reentrant model
+  1595 ;;
+  1596                           
+  1597                           	psect	text6
+  1598   000ED0                     __ptext6:
+  1599                           	callstack 0
+  1600   000ED0                     _LCDPutCmd:
+  1601                           	callstack 29
+  1602                           
+  1603                           ;incstack = 0
+  1604                           ;LCDPutCmd@ch stored from wreg
+  1605   000ED0  6E10               	movwf	LCDPutCmd@ch^0,c
+  1606   000ED2                     
+  1607                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 79:     void LCDPutCmd(unsigned char ch);C:/Users/Roberto Fernandez/Documents/el
+      +                          ectronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 80:     {;C:/Users/Roberto Ferna
+      +                          ndez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 81:         _de
+      +                          lay((unsigned long)((5)*(2000000L/4000.0)));
+  1608   000ED2  0E04               	movlw	4
+  1609   000ED4  6E0F               	movwf	??_LCDPutCmd^0,c
+  1610   000ED6  0E3E               	movlw	62
+  1611   000ED8                     u767:
+  1612   000ED8  2EE8               	decfsz	wreg,f,c
+  1613   000EDA  D7FE               	bra	u767
+  1614   000EDC  2E0F               	decfsz	??_LCDPutCmd^0,f,c
+  1615   000EDE  D7FC               	bra	u767
+  1616   000EE0                     
+  1617                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 82:         LCDWriteNibble(ch,0);
+  1618   000EE0  0E00               	movlw	0
+  1619   000EE2  6E0D               	movwf	LCDWriteNibble@b^0,c
+  1620   000EE4  5010               	movf	LCDPutCmd@ch^0,w,c
+  1621   000EE6  EC98  F007         	call	_LCDWriteNibble
+  1622   000EEA                     
+  1623                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 83:         ch = ch << 4;
+  1624   000EEA  3810               	swapf	LCDPutCmd@ch^0,w,c
+  1625   000EEC  0BF0               	andlw	240
+  1626   000EEE  6E10               	movwf	LCDPutCmd@ch^0,c
+  1627   000EF0                     
+  1628                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 84:         _delay((unsigned long)((1)*(2000000L/4000.0)));
+  1629   000EF0  0EA6               	movlw	166
+  1630   000EF2                     u777:
+  1631   000EF2  2EE8               	decfsz	wreg,f,c
+  1632   000EF4  D7FE               	bra	u777
+  1633   000EF6  D000               	nop2	
+  1634   000EF8                     
+  1635                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 85:         LCDWriteNibble(ch,0);
+  1636   000EF8  0E00               	movlw	0
+  1637   000EFA  6E0D               	movwf	LCDWriteNibble@b^0,c
+  1638   000EFC  5010               	movf	LCDPutCmd@ch^0,w,c
+  1639   000EFE  EC98  F007         	call	_LCDWriteNibble
+  1640   000F02  0012               	return		;funcret
+  1641   000F04                     __end_of_LCDPutCmd:
+  1642                           	callstack 0
+  1643                           
+  1644 ;; *************** function _LCDWriteNibble *****************
+  1645 ;; Defined at:
+  1646 ;;		line 39 in file "C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c"
+  1647 ;; Parameters:    Size  Location     Type
+  1648 ;;  ch              1    wreg     unsigned char 
+  1649 ;;  b               1    0[COMRAM] unsigned char 
+  1650 ;; Auto vars:     Size  Location     Type
+  1651 ;;  ch              1    1[COMRAM] unsigned char 
+  1652 ;; Return value:  Size  Location     Type
+  1653 ;;                  1    wreg      void 
+  1654 ;; Registers used:
+  1655 ;;		wreg, status,2, status,0
+  1656 ;; Tracked objects:
+  1657 ;;		On entry : 0/0
+  1658 ;;		On exit  : 0/0
+  1659 ;;		Unchanged: 0/0
+  1660 ;; Data sizes:     COMRAM   BANK0   BANK1   BANK2   BANK3   BANK4   BANK5   BANK6   BANK7
+  1661 ;;      Params:         1       0       0       0       0       0       0       0       0
+  1662 ;;      Locals:         1       0       0       0       0       0       0       0       0
+  1663 ;;      Temps:          0       0       0       0       0       0       0       0       0
+  1664 ;;      Totals:         2       0       0       0       0       0       0       0       0
+  1665 ;;Total ram usage:        2 bytes
+  1666 ;; Hardware stack levels used: 1
+  1667 ;; This function calls:
+  1668 ;;		Nothing
+  1669 ;; This function is called by:
+  1670 ;;		_LCDPutChar
+  1671 ;;		_LCDPutCmd
+  1672 ;; This function uses a non-reentrant model
+  1673 ;;
+  1674                           
+  1675                           	psect	text7
+  1676   000F30                     __ptext7:
+  1677                           	callstack 0
+  1678   000F30                     _LCDWriteNibble:
+  1679                           	callstack 28
+  1680                           
+  1681                           ;incstack = 0
+  1682                           ;LCDWriteNibble@ch stored from wreg
+  1683   000F30  6E0E               	movwf	LCDWriteNibble@ch^0,c
+  1684   000F32                     
+  1685                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 39:     void LCDWriteNibble(unsigned char ch,unsigned char b);C:/Users/Roberto F
+      +                          ernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-XC4.c: 40:     {;C
+      +                          :/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD-X
+      +                          C4.c: 42:         ch = ch & 0xF0;
+  1686   000F32  500E               	movf	LCDWriteNibble@ch^0,w,c
+  1687   000F34  0BF0               	andlw	240
+  1688   000F36  6E0E               	movwf	LCDWriteNibble@ch^0,c
+  1689                           
+  1690                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 44:         LATB = LATB & 0x0F;
+  1691   000F38  508A               	movf	138,w,c	;volatile
+  1692   000F3A  0B0F               	andlw	15
+  1693   000F3C  6E8A               	movwf	138,c	;volatile
+  1694                           
+  1695                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 45:         LATB = LATB | ch;
+  1696   000F3E  508A               	movf	138,w,c	;volatile
+  1697   000F40  100E               	iorwf	LCDWriteNibble@ch^0,w,c
+  1698   000F42  6E8A               	movwf	138,c	;volatile
+  1699   000F44                     
+  1700                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 47:         LATBbits.LB0 = b;
+  1701   000F44  B00D               	btfsc	LCDWriteNibble@b^0,0,c
+  1702   000F46  D002               	bra	u465
+  1703   000F48  908A               	bcf	138,0,c	;volatile
+  1704   000F4A  D001               	bra	u466
+  1705   000F4C                     u465:
+  1706   000F4C  808A               	bsf	138,0,c	;volatile
+  1707   000F4E                     u466:
+  1708   000F4E                     
+  1709                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 48:         LATBbits.LB1 = 0;
+  1710   000F4E  928A               	bcf	138,1,c	;volatile
+  1711   000F50                     
+  1712                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 49:         LATBbits.LB2 = 1;
+  1713   000F50  848A               	bsf	138,2,c	;volatile
+  1714   000F52                     
+  1715                           ;C:/Users/Roberto Fernandez/Documents/electronica digital avanzada/examen3/examen3.X/LCD
+      +                          -XC4.c: 50:         LATBbits.LB2 = 0;
+  1716   000F52  948A               	bcf	138,2,c	;volatile
+  1717   000F54  0012               	return		;funcret
+  1718   000F56                     __end_of_LCDWriteNibble:
+  1719                           	callstack 0
+  1720                           
+  1721                           	psect	rparam
+  1722   000000                     
+  1723                           	psect	idloc
+  1724                           
+  1725                           ;Config register IDLOC0 @ 0x200000
+  1726                           ;	unspecified, using default values
+  1727   200000                     	org	2097152
+  1728   200000  FF                 	db	255
+  1729                           
+  1730                           ;Config register IDLOC1 @ 0x200001
+  1731                           ;	unspecified, using default values
+  1732   200001                     	org	2097153
+  1733   200001  FF                 	db	255
+  1734                           
+  1735                           ;Config register IDLOC2 @ 0x200002
+  1736                           ;	unspecified, using default values
+  1737   200002                     	org	2097154
+  1738   200002  FF                 	db	255
+  1739                           
+  1740                           ;Config register IDLOC3 @ 0x200003
+  1741                           ;	unspecified, using default values
+  1742   200003                     	org	2097155
+  1743   200003  FF                 	db	255
+  1744                           
+  1745                           ;Config register IDLOC4 @ 0x200004
+  1746                           ;	unspecified, using default values
+  1747   200004                     	org	2097156
+  1748   200004  FF                 	db	255
+  1749                           
+  1750                           ;Config register IDLOC5 @ 0x200005
+  1751                           ;	unspecified, using default values
+  1752   200005                     	org	2097157
+  1753   200005  FF                 	db	255
+  1754                           
+  1755                           ;Config register IDLOC6 @ 0x200006
+  1756                           ;	unspecified, using default values
+  1757   200006                     	org	2097158
+  1758   200006  FF                 	db	255
+  1759                           
+  1760                           ;Config register IDLOC7 @ 0x200007
+  1761                           ;	unspecified, using default values
+  1762   200007                     	org	2097159
+  1763   200007  FF                 	db	255
+  1764                           
+  1765                           	psect	config
+  1766                           
+  1767                           ;Config register CONFIG1L @ 0x300000
+  1768                           ;	unspecified, using default values
+  1769                           ;	PLL Prescaler Selection bits
+  1770                           ;	PLLDIV = 0x0, unprogrammed default
+  1771                           ;	System Clock Postscaler Selection bits
+  1772                           ;	CPUDIV = 0x0, unprogrammed default
+  1773                           ;	USB Clock Selection bit (used in Full-Speed USB mode only; UCFG:FSEN = 1)
+  1774                           ;	USBDIV = 0x0, unprogrammed default
+  1775   300000                     	org	3145728
+  1776   300000  00                 	db	0
+  1777                           
+  1778                           ;Config register CONFIG1H @ 0x300001
+  1779                           ;	unspecified, using default values
+  1780                           ;	Oscillator Selection bits
+  1781                           ;	FOSC = 0x5, unprogrammed default
+  1782                           ;	Fail-Safe Clock Monitor Enable bit
+  1783                           ;	FCMEN = 0x0, unprogrammed default
+  1784                           ;	Internal/External Oscillator Switchover bit
+  1785                           ;	IESO = 0x0, unprogrammed default
+  1786   300001                     	org	3145729
+  1787   300001  05                 	db	5
+  1788                           
+  1789                           ;Config register CONFIG2L @ 0x300002
+  1790                           ;	unspecified, using default values
+  1791                           ;	Power-up Timer Enable bit
+  1792                           ;	PWRT = 0x1, unprogrammed default
+  1793                           ;	Brown-out Reset Enable bits
+  1794                           ;	BOR = 0x3, unprogrammed default
+  1795                           ;	Brown-out Reset Voltage bits
+  1796                           ;	BORV = 0x3, unprogrammed default
+  1797                           ;	USB Voltage Regulator Enable bit
+  1798                           ;	VREGEN = 0x0, unprogrammed default
+  1799   300002                     	org	3145730
+  1800   300002  1F                 	db	31
+  1801                           
+  1802                           ;Config register CONFIG2H @ 0x300003
+  1803                           ;	unspecified, using default values
+  1804                           ;	Watchdog Timer Enable bit
+  1805                           ;	WDT = 0x1, unprogrammed default
+  1806                           ;	Watchdog Timer Postscale Select bits
+  1807                           ;	WDTPS = 0xF, unprogrammed default
+  1808   300003                     	org	3145731
+  1809   300003  1F                 	db	31
+  1810                           
+  1811                           ; Padding undefined space
+  1812   300004                     	org	3145732
+  1813   300004  FF                 	db	255
+  1814                           
+  1815                           ;Config register CONFIG3H @ 0x300005
+  1816                           ;	unspecified, using default values
+  1817                           ;	CCP2 MUX bit
+  1818                           ;	CCP2MX = 0x1, unprogrammed default
+  1819                           ;	PORTB A/D Enable bit
+  1820                           ;	PBADEN = 0x1, unprogrammed default
+  1821                           ;	Low-Power Timer 1 Oscillator Enable bit
+  1822                           ;	LPT1OSC = 0x0, unprogrammed default
+  1823                           ;	MCLR Pin Enable bit
+  1824                           ;	MCLRE = 0x1, unprogrammed default
+  1825   300005                     	org	3145733
+  1826   300005  83                 	db	131
+  1827                           
+  1828                           ;Config register CONFIG4L @ 0x300006
+  1829                           ;	unspecified, using default values
+  1830                           ;	Stack Full/Underflow Reset Enable bit
+  1831                           ;	STVREN = 0x1, unprogrammed default
+  1832                           ;	Single-Supply ICSP Enable bit
+  1833                           ;	LVP = 0x1, unprogrammed default
+  1834                           ;	Dedicated In-Circuit Debug/Programming Port (ICPORT) Enable bit
+  1835                           ;	ICPRT = 0x0, unprogrammed default
+  1836                           ;	Extended Instruction Set Enable bit
+  1837                           ;	XINST = 0x0, unprogrammed default
+  1838                           ;	Background Debugger Enable bit
+  1839                           ;	DEBUG = 0x1, unprogrammed default
+  1840   300006                     	org	3145734
+  1841   300006  85                 	db	133
+  1842                           
+  1843                           ; Padding undefined space
+  1844   300007                     	org	3145735
+  1845   300007  FF                 	db	255
+  1846                           
+  1847                           ;Config register CONFIG5L @ 0x300008
+  1848                           ;	unspecified, using default values
+  1849                           ;	Code Protection bit
+  1850                           ;	CP0 = 0x1, unprogrammed default
+  1851                           ;	Code Protection bit
+  1852                           ;	CP1 = 0x1, unprogrammed default
+  1853                           ;	Code Protection bit
+  1854                           ;	CP2 = 0x1, unprogrammed default
+  1855                           ;	Code Protection bit
+  1856                           ;	CP3 = 0x1, unprogrammed default
+  1857   300008                     	org	3145736
+  1858   300008  0F                 	db	15
+  1859                           
+  1860                           ;Config register CONFIG5H @ 0x300009
+  1861                           ;	unspecified, using default values
+  1862                           ;	Boot Block Code Protection bit
+  1863                           ;	CPB = 0x1, unprogrammed default
+  1864                           ;	Data EEPROM Code Protection bit
+  1865                           ;	CPD = 0x1, unprogrammed default
+  1866   300009                     	org	3145737
+  1867   300009  C0                 	db	192
+  1868                           
+  1869                           ;Config register CONFIG6L @ 0x30000A
+  1870                           ;	unspecified, using default values
+  1871                           ;	Write Protection bit
+  1872                           ;	WRT0 = 0x1, unprogrammed default
+  1873                           ;	Write Protection bit
+  1874                           ;	WRT1 = 0x1, unprogrammed default
+  1875                           ;	Write Protection bit
+  1876                           ;	WRT2 = 0x1, unprogrammed default
+  1877                           ;	Write Protection bit
+  1878                           ;	WRT3 = 0x1, unprogrammed default
+  1879   30000A                     	org	3145738
+  1880   30000A  0F                 	db	15
+  1881                           
+  1882                           ;Config register CONFIG6H @ 0x30000B
+  1883                           ;	unspecified, using default values
+  1884                           ;	Configuration Register Write Protection bit
+  1885                           ;	WRTC = 0x1, unprogrammed default
+  1886                           ;	Boot Block Write Protection bit
+  1887                           ;	WRTB = 0x1, unprogrammed default
+  1888                           ;	Data EEPROM Write Protection bit
+  1889                           ;	WRTD = 0x1, unprogrammed default
+  1890   30000B                     	org	3145739
+  1891   30000B  E0                 	db	224
+  1892                           
+  1893                           ;Config register CONFIG7L @ 0x30000C
+  1894                           ;	unspecified, using default values
+  1895                           ;	Table Read Protection bit
+  1896                           ;	EBTR0 = 0x1, unprogrammed default
+  1897                           ;	Table Read Protection bit
+  1898                           ;	EBTR1 = 0x1, unprogrammed default
+  1899                           ;	Table Read Protection bit
+  1900                           ;	EBTR2 = 0x1, unprogrammed default
+  1901                           ;	Table Read Protection bit
+  1902                           ;	EBTR3 = 0x1, unprogrammed default
+  1903   30000C                     	org	3145740
+  1904   30000C  0F                 	db	15
+  1905                           
+  1906                           ;Config register CONFIG7H @ 0x30000D
+  1907                           ;	unspecified, using default values
+  1908                           ;	Boot Block Table Read Protection bit
+  1909                           ;	EBTRB = 0x1, unprogrammed default
+  1910   30000D                     	org	3145741
+  1911   30000D  40                 	db	64
+  1912                           tosu	equ	0xFFF
+  1913                           tosh	equ	0xFFE
+  1914                           tosl	equ	0xFFD
+  1915                           stkptr	equ	0xFFC
+  1916                           pclatu	equ	0xFFB
+  1917                           pclath	equ	0xFFA
+  1918                           pcl	equ	0xFF9
+  1919                           tblptru	equ	0xFF8
+  1920                           tblptrh	equ	0xFF7
+  1921                           tblptrl	equ	0xFF6
+  1922                           tablat	equ	0xFF5
+  1923                           prodh	equ	0xFF4
+  1924                           prodl	equ	0xFF3
+  1925                           indf0	equ	0xFEF
+  1926                           postinc0	equ	0xFEE
+  1927                           postdec0	equ	0xFED
+  1928                           preinc0	equ	0xFEC
+  1929                           plusw0	equ	0xFEB
+  1930                           fsr0h	equ	0xFEA
+  1931                           fsr0l	equ	0xFE9
+  1932                           wreg	equ	0xFE8
+  1933                           indf1	equ	0xFE7
+  1934                           postinc1	equ	0xFE6
+  1935                           postdec1	equ	0xFE5
+  1936                           preinc1	equ	0xFE4
+  1937                           plusw1	equ	0xFE3
+  1938                           fsr1h	equ	0xFE2
+  1939                           fsr1l	equ	0xFE1
+  1940                           bsr	equ	0xFE0
+  1941                           indf2	equ	0xFDF
+  1942                           postinc2	equ	0xFDE
+  1943                           postdec2	equ	0xFDD
+  1944                           preinc2	equ	0xFDC
+  1945                           plusw2	equ	0xFDB
+  1946                           fsr2h	equ	0xFDA
+  1947                           fsr2l	equ	0xFD9
+  1948                           status	equ	0xFD8
+
+Data Sizes:
+    Strings     45
+    Constant    0
+    Data        0
+    BSS         12
+    Persistent  0
+    Stack       0
+
+Auto Spaces:
+    Space          Size  Autos    Used
+    COMRAM           95     12      24
+    BANK0           160      0       0
+    BANK1           256      0       0
+    BANK2           256      0       0
+    BANK3           256      0       0
+    BANK4           256      0       0
+    BANK5           256      0       0
+    BANK6           256      0       0
+    BANK7           256      0       0
+
+Pointer List with Targets:
+
+    LCDPutStr@ptr	PTR unsigned char  size(2) Largest target is 16
+		 -> STR_4(CODE[7]), STR_3(CODE[16]), STR_2(CODE[7]), STR_1(CODE[15]), 
+
+
+Critical Paths under _main in COMRAM
+
+    _main->___awdiv
+    _LCDPutStr->_LCDPutChar
+    _LCDPutChar->_LCDWriteNibble
+    _LCDInit->_LCDPutCmd
+    _LCDPutCmd->_LCDWriteNibble
+
+Critical Paths under _main in BANK0
+
+    None.
+
+Critical Paths under _main in BANK1
+
+    None.
+
+Critical Paths under _main in BANK2
+
+    None.
+
+Critical Paths under _main in BANK3
+
+    None.
+
+Critical Paths under _main in BANK4
+
+    None.
+
+Critical Paths under _main in BANK5
+
+    None.
+
+Critical Paths under _main in BANK6
+
+    None.
+
+Critical Paths under _main in BANK7
+
+    None.
+
+Call Graph Tables:
+
+ ---------------------------------------------------------------------------------
+ (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+ ---------------------------------------------------------------------------------
+ (0) _main                                                 4     4      0    2280
+                                              8 COMRAM     4     4      0
+                            _LCDInit
+                          _LCDPutCmd
+                          _LCDPutStr
+                            ___awdiv
+                          _tecladito
+ ---------------------------------------------------------------------------------
+ (1) _tecladito                                            3     3      0     165
+                                              0 COMRAM     3     3      0
+ ---------------------------------------------------------------------------------
+ (1) ___awdiv                                              8     4      4     452
+                                              0 COMRAM     8     4      4
+ ---------------------------------------------------------------------------------
+ (1) _LCDPutStr                                            2     0      2     787
+                                              4 COMRAM     2     0      2
+                         _LCDPutChar
+ ---------------------------------------------------------------------------------
+ (2) _LCDPutChar                                           2     2      0     438
+                                              2 COMRAM     2     2      0
+                     _LCDWriteNibble
+ ---------------------------------------------------------------------------------
+ (1) _LCDInit                                              1     1      0     438
+                                              4 COMRAM     1     1      0
+                          _LCDPutCmd
+ ---------------------------------------------------------------------------------
+ (1) _LCDPutCmd                                            2     2      0     438
+                                              2 COMRAM     2     2      0
+                     _LCDWriteNibble
+ ---------------------------------------------------------------------------------
+ (3) _LCDWriteNibble                                       2     1      1     371
+                                              0 COMRAM     2     1      1
+ ---------------------------------------------------------------------------------
+ Estimated maximum stack depth 3
+ ---------------------------------------------------------------------------------
+
+ Call Graph Graphs:
+
+ _main (ROOT)
+   _LCDInit
+     _LCDPutCmd
+       _LCDWriteNibble
+   _LCDPutCmd
+   _LCDPutStr
+     _LCDPutChar
+       _LCDWriteNibble
+   ___awdiv
+   _tecladito
+
+ Address spaces:
+Name               Size   Autos  Total    Cost      Usage
+BIGRAM             7FF      0       0      29        0.0%
+EEDATA             100      0       0       0        0.0%
+BITBANK7           100      0       0      18        0.0%
+BANK7              100      0       0      19        0.0%
+BITBANK6           100      0       0      16        0.0%
+BANK6              100      0       0      17        0.0%
+BITBANK5           100      0       0      14        0.0%
+BANK5              100      0       0      15        0.0%
+BITBANK4           100      0       0      12        0.0%
+BANK4              100      0       0      13        0.0%
+BITBANK3           100      0       0      10        0.0%
+BANK3              100      0       0      11        0.0%
+BITBANK2           100      0       0       8        0.0%
+BANK2              100      0       0       9        0.0%
+BITBANK1           100      0       0       6        0.0%
+BANK1              100      0       0       7        0.0%
+BITBANK0            A0      0       0       4        0.0%
+BANK0               A0      0       0       5        0.0%
+BITCOMRAM           5F      0       0       0        0.0%
+COMRAM              5F      C      18       1       25.3%
+BITBIGSFRh          3E      0       0      20        0.0%
+BITBIGSFRlh         2B      0       0      21        0.0%
+BITBIGSFRlllll      20      0       0      27        0.0%
+BITBIGSFRllllhh      5      0       0      25        0.0%
+BITBIGSFRlllhh       5      0       0      23        0.0%
+BITBIGSFRllllhl      2      0       0      26        0.0%
+BITBIGSFRlllhl       1      0       0      24        0.0%
+BITBIGSFRllh         1      0       0      22        0.0%
+BIGSFR               0      0       0     200        0.0%
+BITSFR               0      0       0     200        0.0%
+SFR                  0      0       0     200        0.0%
+STACK                0      0       0       2        0.0%
+NULL                 0      0       0       0        0.0%
+ABS                  0      0      18      28        0.0%
+DATA                 0      0      18       3        0.0%
+CODE                 0      0       0       0        0.0%
+
+
+Microchip Technology PIC18 Macro Assembler V2.40 build 20220703182018 
+Symbol Table                                                                                   Mon Apr 15 08:41:57 2024
+
+            ?_LCDPutChar 000D                       l37 0B86                       l62 089C  
+                     l73 0992                       l90 0B58                       l66 08F0  
+                     l58 0862                       l86 0B06                       u30 0862  
+                     u31 085E                       u40 0870                       u41 086C  
+                     u50 089C                       u51 0898                       u60 08AA  
+                     u61 08A6                       u70 08D6                       u71 08D2  
+                     u80 08FE                       u81 08FA                       u90 0910  
+                     u91 090C             ___awdiv@sign 0012                      l111 0F2E  
+                    l120 0ECE                      l105 0E98                      l114 0F02  
+                    l108 0F54                      l354 0E5E                      l900 092C  
+                    l910 0980                      l902 093A                      l920 09BE  
+                    l912 0984                      l904 0954                      l930 09E4  
+                    l922 09CC                      l906 0958                      l940 0A14  
+                    l932 09E6                      l924 09D0                      l916 09A0  
+                    l908 0966                      l860 0850                      l852 0830  
+                    l950 0A68                      l942 0A22                      l934 09E8  
+                    l926 09E0                      l918 09BA                      l870 088A  
+                    l862 0852                      l854 083C                      l960 0A90  
+                    l952 0A6C                      l944 0A3C                      l936 09F6  
+                    l928 09E2                      l880 08C8                      l872 088E  
+                    l864 0854                      l856 084C                      l970 0AA8  
+                    l962 0A92                      l954 0A7A                      l946 0A40  
+                    l938 0A10                      l890 0914                      l882 08D6  
+                    l858 084E                      l980 0AE6                      l972 0AB6  
+                    l964 0A94                      l956 0A7E                      l948 0A4E  
+                    l892 0924                      l884 08FE                      l876 08AA  
+                    l868 0870                      l982 0AF4                      l974 0AD0  
+                    l966 0A96                      l958 0A8E                      l894 0926  
+                    l886 0902                      l878 08C4                      l990 0B3C  
+                    l984 0AF8                      l976 0AD4                      l968 0AA4  
+                    l896 0928                      l888 0910                      l978 0AE2  
+                    l898 092A                      l988 0B14                      u100 093A  
+                    u101 0936                      u110 0966                      u111 0962  
+                    u200 0AB6                      u120 0992                      u201 0AB2  
+                    u121 098E                      u210 0AE2                      u130 09A0  
+                    u211 0ADE                      u131 099C                      u220 0AF4  
+                    u140 09CC                      u221 0AF0                      u141 09C8  
+                    u230 0B06                      u150 09F6                      u231 0B02  
+                    u151 09F2                      u240 0B14                      u160 0A22  
+                    u241 0B10                      u161 0A1E                      u250 0B58  
+                    u170 0A4E                      u251 0B54                      u171 0A4A  
+                    u500 0DEE                      u180 0A7A                      u501 0DEA  
+                    u181 0A76                      u510 0E0C                      u190 0AA4  
+                    u511 0E08                      u191 0AA0                      u520 0E28  
+                    u600 0C8A                      u521 0E24                      u601 0C86  
+                    u530 0E4E                      u610 0C9E                      u531 0E4A  
+                    u611 0C9A                      u620 0CB2                      u540 0B86  
+                    u621 0CAE                      u541 0B82                      u470 0ECE  
+                    u630 0D1C                      u550 0B94                      u471 0ECA  
+                    u631 0D18                      u551 0B90                      u480 0DAE  
+                    u640 0D30                      u560 0BDC                      u465 0F4C  
+                    u481 0DAA                      u641 0D2C                      u561 0BD8  
+                    u466 0F4E                      u490 0DC8                      u650 0D44  
+                    u570 0C0C                      u491 0DC4                      u707 0842  
+                    u651 0D40                      u571 0C08                      u660 0D58  
+                    u580 0C22                      u717 091A                      u661 0D54  
+                    u581 0C1E                      u670 0D90                      u590 0C76  
+                    u727 09D6                      u671 0D8C                      u591 0C72  
+                    u737 0A84                      u747 0F0C                      u757 0E70  
+                    u767 0ED8                      u687 0C4A                      u777 0EF2  
+                    u697 0CDE                      _par 0009                      wreg 000FE8  
+        __end_of_LCDInit 0E9A                     l1200 0DC8                     l1210 0DF6  
+                   l1202 0DD0                     l1140 0F50                     l1220 0E30  
+                   l1212 0DFE                     l1204 0DD4                     l1300 0D02  
+                   l1142 0F52                     l1134 0F32                     l1150 0EF0  
+                   l1230 0E56                     l1222 0E32                     l1214 0E0C  
+                   l1206 0DDC                     l1310 0D58                     l1302 0D0A  
+                   l1136 0F44                     l1152 0EF8                     l1144 0ED2  
+                   l1160 0F24                     l1224 0E38                     l1216 0E12  
+                   l1208 0DEE                     l1320 0D7E                     l1312 0D5E  
+                   l1304 0D1C                     l1240 0B70                     l1138 0F4E  
+                   l1146 0EE0                     l1170 0E6A                     l1162 0E60  
+                   l1154 0F06                     l1218 0E28                     l1226 0E3E  
+                   l1322 0D80                     l1314 0D66                     l1306 0D30  
+                   l1250 0BB0                     l1242 0B76                     l1234 0B5A  
+                   l1148 0EEA                     l1180 0E92                     l1172 0E7A  
+                   l1164 0E64                     l1156 0F14                     l1228 0E4E  
+                   l1316 0D6E                     l1308 0D44                     l1324 0D82  
+                   l1252 0BDC                     l1260 0C14                     l1244 0B78  
+                   l1236 0B66                     l1174 0E80                     l1166 0E66  
+                   l1158 0F1E                     l1182 0E9A                     l1190 0D9C  
+                   l1326 0D90                     l1318 0D76                     l1270 0C5A  
+                   l1262 0C22                     l1254 0BE0                     l1238 0B6A  
+                   l1176 0E86                     l1168 0E68                     l1184 0E9E  
+                   l1192 0DA0                     l1280 0C9E                     l1272 0C60  
+                   l1264 0C2E                     l1256 0C0C                     l1248 0B94  
+                   l1178 0E8C                     l1186 0EAE                     l1194 0DAE  
+                   l1290 0CD2                     l1282 0CB2                     l1274 0C64  
+                   l1266 0C34                     l1258 0C10                     l1188 0EB2  
+                   l1196 0DB6                     l1292 0CD4                     l1284 0CBE  
+                   l1276 0C76                     l1268 0C40                     l1198 0DBA  
+                   l1294 0CEA                     l1286 0CC4                     l1278 0C8A  
+                   l1296 0CF2                     l1288 0CD0                     l1298 0CFA  
+                   STR_1 0811                     STR_2 0827                     STR_3 0801  
+                   STR_4 0820                     _LATB 000F8A                     _cont 000B  
+                   _main 0B5A                     fsr2h 000FDA                     fsr2l 000FD9  
+                   start 0000             ___param_bank 000000              LCDPutCmd@ch 0010  
+                  ?_main 000D          __end_of___awdiv 0E60          ___awdiv@divisor 000F  
+        ___awdiv@counter 0011                    _TRISA 000F92                    _TRISB 000F93  
+                  _TRISD 000F95                    tablat 000FF5                    status 000FD8  
+        __initialization 0F56             __end_of_main 0D9C                   ??_main 0015  
+          __activetblptr 000001                ??_LCDInit 0011        __end_of_LCDPutCmd 0F04  
+           LCDPutChar@ch 0010        __end_of_LCDPutStr 0ED0                   _ADCON1 000FC1  
+       ___awdiv@dividend 000D             LCDPutStr@ptr 0011           _LCDWriteNibble 0F30  
+              ??___awdiv 0011                   clear_0 0F5C         ___awdiv@quotient 0013  
+                 isa$std 000001             __mediumconst 0000                   tblptrh 000FF7  
+                 tblptrl 000FF6                   tblptru 000FF8   __end_of_LCDWriteNibble 0F56  
+             __accesstop 0060  __end_of__initialization 0F62            ___rparam_used 000001  
+         __pcstackCOMRAM 000D             ??_LCDPutChar 000F          ?_LCDWriteNibble 000D  
+     __end_of_LCDPutChar 0F30                  _LCDInit 0E60                  __Hparam 0000  
+                __Lparam 0000                  ___awdiv 0D9C             __psmallconst 0800  
+                __pcinit 0F56                  __ramtop 0800                  __ptext0 0B5A  
+                __ptext1 0830                  __ptext2 0D9C                  __ptext3 0E9A  
+                __ptext4 0F04                  __ptext5 0E60                  __ptext6 0ED0  
+                __ptext7 0F30                  _teclado 0001                _LCDPutCmd 0ED0  
+              _LCDPutStr 0E9A     end_of_initialization 0F62        __end_of_tecladito 0B5A  
+                postdec2 000FDD                  postinc0 000FEE                  postinc2 000FDE  
+              _PORTAbits 000F80                _PORTDbits 000F83                _TRISBbits 000F93  
+             ?_LCDPutCmd 000D               ?_LCDPutStr 0011      start_initialization 0F56  
+       ??_LCDWriteNibble 000E                 ?_LCDInit 000D              __pbssCOMRAM 0001  
+            ??_LCDPutCmd 000F              ??_LCDPutStr 0013                 ?___awdiv 000D  
+       LCDWriteNibble@ch 000E              __smallconst 0800        tecladito@contador 000E  
+               _LATAbits 000F89                 _LATBbits 000F8A                 _LATDbits 000F8C  
+              _tecladito 0830               ?_tecladito 000D                 __Hrparam 0000  
+               __Lrparam 0000             __Lsmallconst 0800          LCDWriteNibble@b 000D  
+               isa$xinst 000000               _LCDPutChar 0F04              ??_tecladito 000D  
